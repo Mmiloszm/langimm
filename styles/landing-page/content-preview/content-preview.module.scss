@@ -1,0 +1,76 @@
+@use "@/styles/variables";
+@use "@/styles/mixins" as *;
+
+.contentWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 5em auto 0 auto;
+  @include desktop {
+    justify-content: center;
+    margin: 0;
+  }
+
+  .titleWrapper {
+    display: block;
+    text-align: center;
+    margin-bottom: 2.5em;
+
+    .title {
+      font-size: 2rem;
+      color: variables.$dark-text;
+
+      @include desktop {
+        font-size: 2.5rem;
+      }
+    }
+  }
+
+  .subtitleWrapper {
+    display: block;
+    text-align: center;
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: variables.$dark-text;
+    }
+  }
+
+  .gridContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    margin: 5em auto 0 auto;
+    column-gap: 3.5em;
+
+    @include desktop {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-rows: repeat(2, 1fr);
+    }
+
+    .topicContainer {
+      display: flex;
+      background-color: variables.$elements-secondary-blue;
+      max-width: 140px;
+      padding: 1em 2em;
+      margin: 1em;
+      align-items: center;
+      justify-content: space-between;
+
+      .topicName {
+        color: white;
+        font-size: 1rem;
+      }
+    }
+    .desktopContainer {
+      display: none;
+      @include desktop {
+        display: block;
+      }
+    }
+  }
+
+  .imageWrapper {
+    margin: 5em auto;
+  }
+}

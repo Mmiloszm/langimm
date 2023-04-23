@@ -1,0 +1,92 @@
+@use "@/styles/variables";
+@use "@/styles/mixins" as *;
+
+.wrapper {
+  @include desktop {
+    display: flex;
+    align-items: center;
+    margin-right: 3em;
+  }
+  .menuIcon {
+    cursor: pointer;
+
+    @include desktop {
+      display: none;
+    }
+  }
+  .container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: hidden;
+    width: 100vw;
+    height: 100vh;
+    background-color: variables.$main-blue;
+
+    @include desktop {
+      display: block !important;
+      position: static;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      background-color: transparent;
+      top: auto;
+      left: auto;
+    }
+
+    .closeIcon {
+      float: right;
+      margin: 2.8em 3.5em;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+
+      @include desktop {
+        display: none;
+      }
+    }
+
+    .mainNav {
+      width: 100%;
+      height: 100%;
+      margin: 7em auto;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      @include desktop {
+        flex-direction: row;
+        margin: 0;
+        align-items: flex-start;
+      }
+
+      .navItems {
+        list-style: none;
+        text-align: center;
+
+        @include desktop {
+          display: flex;
+          align-items: center;
+          gap: 2em;
+        }
+
+        .divider {
+          display: block;
+          height: 1px;
+          width: 100%;
+          margin: 1em auto;
+          border-bottom: 2px solid #acc8e5;
+
+          @include desktop {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .buttonMenu {
+    background-color: transparent;
+    border: none;
+  }
+}

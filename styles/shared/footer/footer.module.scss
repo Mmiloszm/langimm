@@ -1,0 +1,67 @@
+@use "@/styles/variables";
+@use "@/styles/mixins" as *;
+.container {
+  width: 100%;
+  height: 40em;
+  background-color: variables.$footer-blue;
+  color: variables.$dark-text;
+
+  .contentWrapper {
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 5em;
+    flex-direction: column;
+    padding: 5em 3em;
+
+    @include desktop {
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10em 3em;
+      margin: 0 auto;
+    }
+
+    .headline {
+      display: flex;
+      flex-direction: column;
+
+      .logo {
+        @include desktop {
+          width: 150px;
+          height: 150px;
+          margin-top: -40px;
+        }
+      }
+
+      .slogan {
+        margin-top: -10px;
+      }
+    }
+
+    .email {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-start;
+      align-items: center;
+
+      .emailName {
+        text-decoration: none;
+        color: variables.$dark-text;
+      }
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      .menuItem {
+        display: block;
+        text-decoration: none;
+        color: variables.$dark-text;
+        font-weight: 500;
+      }
+    }
+  }
+}

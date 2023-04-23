@@ -1,0 +1,24 @@
+@use "@styles/variables";
+
+.topNavigation {
+  position: fixed;
+  width: 100%;
+  height: 6em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: variables.$main-blue;
+  padding: 0 2.5em;
+
+  .menuIcon {
+    cursor: pointer;
+  }
+
+  .iconWrapper {
+    margin-bottom: -4px;
+  }
+
+  .navWrapper {
+    display: none;
+  }
+}
