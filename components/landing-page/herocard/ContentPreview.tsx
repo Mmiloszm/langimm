@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "@/styles/landing-page/content-preview/content-preview.module.scss";
+import CustomIcon from "@/components/shared/custom-icon/CustomIcon";
 
 type ContentPreviewProps = {
   title: string;
@@ -31,78 +32,78 @@ const ContentPreview = ({ title, subtitle, image }: ContentPreviewProps) => {
       ) : (
         <div className={styles.gridContainer}>
           <div className={styles.topicContainer}>
-            <Image
-              alt="ball"
-              src={"/icons/sports_ball.svg"}
-              width={24}
-              height={24}
+            <CustomIcon
+              name="basketball"
+              size={24}
+              color="white"
+              weight="bold"
             />
             <span className={styles.topicName}>Sport</span>
           </div>
           <div className={styles.topicContainer}>
-            <Image
-              alt="ball"
-              src={"/icons/sports_ball.svg"}
-              width={24}
-              height={24}
+            <CustomIcon
+              name="basketball"
+              size={24}
+              color="white"
+              weight="bold"
             />
             <span className={styles.topicName}>Sport</span>
           </div>
           <div className={styles.topicContainer}>
-            <Image
-              alt="ball"
-              src={"/icons/sports_ball.svg"}
-              width={24}
-              height={24}
+            <CustomIcon
+              name="basketball"
+              size={24}
+              color="white"
+              weight="bold"
             />
             <span className={styles.topicName}>Sport</span>
           </div>
           <div className={styles.topicContainer}>
-            <Image
-              alt="ball"
-              src={"/icons/sports_ball.svg"}
-              width={24}
-              height={24}
+            <CustomIcon
+              name="basketball"
+              size={24}
+              color="white"
+              weight="bold"
             />
             <span className={styles.topicName}>Sport</span>
           </div>
           <div className={styles.topicContainer}>
-            <Image
-              alt="ball"
-              src={"/icons/sports_ball.svg"}
-              width={24}
-              height={24}
+            <CustomIcon
+              name="basketball"
+              size={24}
+              color="white"
+              weight="bold"
             />
             <span className={styles.topicName}>Sport</span>
           </div>
           <div className={styles.topicContainer}>
-            <Image
-              alt="ball"
-              src={"/icons/sports_ball.svg"}
-              width={24}
-              height={24}
+            <CustomIcon
+              name="basketball"
+              size={24}
+              color="white"
+              weight="bold"
             />
             <span className={styles.topicName}>Sport</span>
           </div>
           <div
             className={`${styles.topicContainer} ${styles.desktopContainer}`}
           >
-            <Image
-              alt="ball"
-              src={"/icons/sports_ball.svg"}
-              width={24}
-              height={24}
+            <CustomIcon
+              name="basketball"
+              size={24}
+              color="white"
+              weight="bold"
             />
             <span className={styles.topicName}>Sport</span>
           </div>
           <div
             className={`${styles.topicContainer} ${styles.desktopContainer}`}
           >
-            <Image
-              alt="ball"
-              src={"/icons/sports_ball.svg"}
-              width={24}
-              height={24}
+            <CustomIcon
+              name="basketball"
+              size={24}
+              color="white"
+              weight="bold"
             />
             <span className={styles.topicName}>Sport</span>
           </div>

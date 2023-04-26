@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "@styles/shared/navbar/navitems.module.scss";
 import PrimaryButton from "../buttons/PrimaryButton";
 import { useState } from "react";
+import CustomIcon from "../custom-icon/CustomIcon";
 
 const Navitems = () => {
   const [display, setDisplay] = useState(false);
@@ -21,13 +22,16 @@ const Navitems = () => {
         className={styles.buttonMenu}
         onClick={() => handleDisplay()}
       >
-        <Image
+        {/* <Image
           src="/icons/menu.svg"
           alt="open menu"
           width={35}
           height={35}
           className={styles.menuIcon}
-        />
+        /> */}
+        <div className={styles.menuIcon}>
+          <CustomIcon name="menu" size={32} weight="bold" color="white" />
+        </div>
       </button>
       <div
         className={styles.container}

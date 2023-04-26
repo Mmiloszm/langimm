@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "@/styles/shared/footer/footer.module.scss";
+import CustomIcon from "../custom-icon/CustomIcon";
 
 const Footer = () => {
   return (
@@ -20,12 +21,12 @@ const Footer = () => {
         </div>
 
         <div className={styles.email}>
-          <Image
-            alt="email icon"
-            src={"/icons/email.svg"}
-            width={24}
-            height={24}
-          />
+          <CustomIcon
+            name="email"
+            size={24}
+            color="#00206a"
+            weight="regular"
+          ></CustomIcon>
           <a href="mailto:jakismail@mail.com" className={styles.emailName}>
             jakismail@mail.com
           </a>
