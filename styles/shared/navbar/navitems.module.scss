@@ -29,11 +29,14 @@
     }
 
     .closeIcon {
-      float: right;
-      margin: 2.3em 3em;
+      position: absolute;
+      top: 30px;
+      right: 35px;
       cursor: pointer;
       background-color: transparent;
       border: none;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
 
       @include desktop {
         display: none;
@@ -80,9 +83,14 @@
   }
 
   .buttonMenu {
+    position: absolute;
+    top: 30px;
+    right: 35px;
     background-color: transparent;
     border: none;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 
     @include desktop {
       display: none;
