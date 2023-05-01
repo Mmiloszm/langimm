@@ -7,13 +7,7 @@
     align-items: center;
     margin-right: 3em;
   }
-  .menuIcon {
-    cursor: pointer;
 
-    @include desktop {
-      display: none;
-    }
-  }
   .container {
     position: fixed;
     top: 0;
@@ -36,7 +30,7 @@
 
     .closeIcon {
       float: right;
-      margin: 2.8em 3.5em;
+      margin: 2.3em 3em;
       cursor: pointer;
       background-color: transparent;
       border: none;
@@ -88,5 +82,10 @@
   .buttonMenu {
     background-color: transparent;
     border: none;
+    cursor: pointer;
+
+    @include desktop {
+      display: none;
+    }
   }
 }

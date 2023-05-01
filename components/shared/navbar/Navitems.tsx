@@ -10,8 +10,8 @@ const Navitems = () => {
   const handleDisplay = () => {
     const previous = display;
     previous
-      ? (document.body.style.overflowY = "visible")
-      : (document.body.style.overflowY = "hidden");
+      ? (document.body.style.overflow = "visible")
+      : (document.body.style.overflow = "hidden");
     setDisplay(!previous);
   };
   return (
@@ -22,16 +22,7 @@ const Navitems = () => {
         className={styles.buttonMenu}
         onClick={() => handleDisplay()}
       >
-        {/* <Image
-          src="/icons/menu.svg"
-          alt="open menu"
-          width={35}
-          height={35}
-          className={styles.menuIcon}
-        /> */}
-        <div className={styles.menuIcon}>
-          <CustomIcon name="menu" size={32} weight="bold" color="white" />
-        </div>
+        <CustomIcon name="menu" size={32} weight="bold" color="white" />
       </button>
       <div
         className={styles.container}
@@ -43,12 +34,7 @@ const Navitems = () => {
           className={styles.closeIcon}
           onClick={() => handleDisplay()}
         >
-          <Image
-            src="/icons/close.svg"
-            alt="close menu"
-            width={21}
-            height={21}
-          />
+          <CustomIcon name="close" size={32} weight="bold" color="white" />
         </button>
         <nav className={styles.mainNav}>
           <ul className={styles.navItems}>

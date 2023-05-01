@@ -29,6 +29,7 @@
   .subtitleWrapper {
     display: block;
     text-align: center;
+    margin: 0 1em;
 
     .subtitle {
       font-size: 1.15rem;
@@ -56,7 +57,9 @@
       margin: 1em;
       align-items: center;
       justify-content: space-between;
-      gap: 1em;
+      @include desktop {
+        gap: 1em;
+      }
 
       .topicName {
         color: white;
