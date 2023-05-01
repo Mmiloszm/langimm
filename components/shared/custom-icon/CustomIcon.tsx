@@ -6,6 +6,7 @@ import {
   Icon,
   IconProps,
   List,
+  X,
 } from "@phosphor-icons/react";
 
 interface CustomIconProps extends IconProps {
@@ -19,6 +20,7 @@ const IconsList: ListOfIconsProps = {
   email: EnvelopeSimple,
   menu: List,
   basketball: Basketball,
+  close: X,
 };
 
 const CustomIcon = ({
