@@ -1,0 +1,87 @@
+@use "@/styles/variables";
+@use "@/styles/mixins" as *;
+$stroke-color: #dadce0;
+
+.authWrapper {
+  width: 100%;
+  height: 100%;
+
+  .authForm {
+    margin: 4em auto;
+    width: 90%;
+    max-width: 450px;
+  }
+
+  @include tablet {
+    margin: 8em auto;
+    border: 1px solid $stroke-color;
+    border-radius: 12px;
+    max-width: 450px;
+  }
+
+  @include desktop {
+    border: 1px solid $stroke-color;
+    border-radius: 12px;
+    max-width: 450px;
+    margin: 3em auto;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .greeter {
+      font-weight: 400;
+    }
+  }
+
+  .inputsWrapper {
+    margin-top: 2.5em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+
+    .hintInput {
+      display: flex;
+      flex-direction: column;
+      .hint {
+        display: block;
+        font-size: 0.8rem;
+        margin: 3px 0px 0px 2px;
+        font-weight: 500;
+        color: variables.$dark-text;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .formButtons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 2.5em 1em 0 1em;
+    @include tablet {
+      padding: 2.5em 1.5em;
+    }
+    @include desktop {
+      padding: 4em 1em 2.5em 1em;
+    }
+  }
+
+  .errorInfo {
+    display: flex;
+    width: 90%;
+    background-color: #ffd6c9;
+    margin: 2em auto;
+    padding: 1.25em;
+    border-radius: 3px;
+    justify-content: space-around;
+    align-items: center;
+    .errorText {
+      font-size: 0.9rem;
+      color: red;
+    }
+  }
+}
