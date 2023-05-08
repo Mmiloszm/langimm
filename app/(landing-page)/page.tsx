@@ -1,5 +1,5 @@
 import HeroCard from "@/components/landing-page/herocard/HeroCard";
-import styles from "../styles/landing-page/landing-page.module.scss";
+import styles from "@/styles/landing-page/landing-page.module.scss";
 import ContentPreview from "@/components/landing-page/herocard/ContentPreview";
 
 export default function Home() {

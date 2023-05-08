@@ -2,10 +2,12 @@
 "use client";
 import {
   Basketball,
+  CircleNotch,
   EnvelopeSimple,
   Icon,
   IconProps,
   List,
+  Warning,
   X,
 } from "@phosphor-icons/react";
 
@@ -21,6 +23,8 @@ const IconsList: ListOfIconsProps = {
   menu: List,
   basketball: Basketball,
   close: X,
+  warning: Warning,
+  loading: CircleNotch,
 };
 
 const CustomIcon = ({
