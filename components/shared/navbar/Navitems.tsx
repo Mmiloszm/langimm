@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import Link from "next/link";
 import styles from "@styles/shared/navbar/navitems.module.scss";
 import PrimaryButton from "../buttons/PrimaryButton";
 import { useState } from "react";
@@ -55,9 +55,11 @@ const Navitems = () => {
             </li>
             <span className={styles.divider}></span> */}
             <li>
-              <PrimaryButton variants={["navButton", "transparent"]}>
-                zaloguj się
-              </PrimaryButton>
+              <Link href={"/signin"}>
+                <PrimaryButton variants={["navButton", "transparent"]}>
+                  zaloguj się
+                </PrimaryButton>
+              </Link>
             </li>
             <li>
               <PrimaryButton variants={["navButton", "navRegister"]}>

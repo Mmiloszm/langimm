@@ -4,7 +4,6 @@
 .button {
   border: none;
   font-size: 0.9rem;
-  font-weight: 500;
   color: white;
   padding: 12px 24px;
   border-radius: 100px;
@@ -49,6 +48,21 @@
 }
 .transparent {
   background-color: transparent !important;
+}
+
+.authSecondaryButton {
+  color: variables.$dark-text;
+  background-color: transparent;
+  font-weight: 500;
+
+  &:hover {
+    background-color: variables.$footer-blue !important;
+  }
+}
+
+.authPrimaryButton {
+  background-color: variables.$elements-blue;
+  font-weight: 500;
 }
 
 .light-blue {
