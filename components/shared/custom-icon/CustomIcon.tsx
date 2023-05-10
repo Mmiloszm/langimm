@@ -2,11 +2,16 @@
 "use client";
 import {
   Basketball,
+  BookOpenText,
   CircleNotch,
   EnvelopeSimple,
+  Exam,
+  Funnel,
+  Gear,
   Icon,
   IconProps,
   List,
+  SignOut,
   Warning,
   X,
 } from "@phosphor-icons/react";
@@ -25,6 +30,11 @@ const IconsList: ListOfIconsProps = {
   close: X,
   warning: Warning,
   loading: CircleNotch,
+  topic: BookOpenText,
+  settings: Gear,
+  signout: SignOut,
+  quiz: Exam,
+  sort: Funnel,
 };
 
 const CustomIcon = ({

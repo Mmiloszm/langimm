@@ -4,8 +4,13 @@ import styles from "@styles/shared/navbar/navitems.module.scss";
 import PrimaryButton from "../buttons/PrimaryButton";
 import { useState } from "react";
 import CustomIcon from "../custom-icon/CustomIcon";
+import { Button } from "@mui/material";
 
-const Navitems = () => {
+type NavitemsType = {
+  version?: "default" | "dashboard";
+};
+
+const Navitems = ({ version }: NavitemsType) => {
   const [display, setDisplay] = useState(false);
   const handleDisplay = () => {
     const previous = display;
@@ -13,6 +18,10 @@ const Navitems = () => {
       ? (document.body.style.overflow = "visible")
       : (document.body.style.overflow = "hidden");
     setDisplay(!previous);
+  };
+
+  const resetDisplay = () => {
+    document.body.style.overflow = "visible";
   };
   return (
     <div className={styles.wrapper}>
@@ -38,34 +47,102 @@ const Navitems = () => {
         </button>
         <nav className={styles.mainNav}>
           <ul className={styles.navItems}>
-            {/* <li>
-              <PrimaryButton variants={["navButton", "transparent"]}>
-                placeholder
-              </PrimaryButton>
-            </li>
-            <li>
-              <PrimaryButton variants={["navButton", "transparent"]}>
-                placeholder
-              </PrimaryButton>
-            </li>
-            <li>
-              <PrimaryButton variants={["navButton", "transparent"]}>
-                placeholder
-              </PrimaryButton>
-            </li>
-            <span className={styles.divider}></span> */}
-            <li>
-              <Link href={"/signin"}>
-                <PrimaryButton variants={["navButton", "transparent"]}>
-                  zaloguj się
-                </PrimaryButton>
-              </Link>
-            </li>
-            <li>
-              <PrimaryButton variants={["navButton", "navRegister"]}>
-                zarejestruj się
-              </PrimaryButton>
-            </li>
+            {version === "default" && (
+              <div className={styles.itemsWrapper}>
+                <li className={styles.item}>
+                  <Link href={"/signin"}>
+                    <Button
+                      sx={{ color: "white" }}
+                      variant="text"
+                      onClick={() => resetDisplay()}
+                    >
+                      zaloguj się
+                    </Button>
+                  </Link>
+                </li>
+                <li className={styles.item}>
+                  <Button variant="contained" onClick={() => resetDisplay()}>
+                    zarejestruj się
+                  </Button>
+                </li>
+              </div>
+            )}
+            {version === "dashboard" && (
+              <div className={styles.itemsWrapper}>
+                <li className={styles.item}>
+                  <Button
+                    sx={{ color: "white" }}
+                    variant="text"
+                    onClick={() => resetDisplay()}
+                    startIcon={
+                      <CustomIcon
+                        name="quiz"
+                        weight="regular"
+                        color="white"
+                        size={24}
+                        alt="quiz"
+                      />
+                    }
+                  >
+                    podejmij quiz
+                  </Button>
+                </li>
+                <li className={styles.item}>
+                  <Button
+                    sx={{ color: "white" }}
+                    variant="text"
+                    onClick={() => resetDisplay()}
+                    startIcon={
+                      <CustomIcon
+                        name="topic"
+                        weight="regular"
+                        color="white"
+                        size={24}
+                        alt="change topics"
+                      />
+                    }
+                  >
+                    wybór tematów
+                  </Button>
+                </li>
+                <li className={styles.item}>
+                  <Button
+                    sx={{ color: "white" }}
+                    variant="text"
+                    onClick={() => resetDisplay()}
+                    startIcon={
+                      <CustomIcon
+                        name="settings"
+                        weight="regular"
+                        color="white"
+                        size={24}
+                        alt="settings"
+                      />
+                    }
+                  >
+                    ustawienia
+                  </Button>
+                </li>
+                <li className={styles.item}>
+                  <Button
+                    sx={{ color: "white" }}
+                    variant="text"
+                    onClick={() => resetDisplay()}
+                    startIcon={
+                      <CustomIcon
+                        name="signout"
+                        weight="regular"
+                        color="white"
+                        size={24}
+                        alt="sign out"
+                      />
+                    }
+                  >
+                    wyloguj się
+                  </Button>
+                </li>
+              </div>
+            )}
           </ul>
         </nav>
       </div>

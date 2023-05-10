@@ -16,6 +16,7 @@
     width: 100vw;
     height: 100vh;
     background-color: variables.$main-blue;
+    z-index: 100;
 
     @include desktop {
       display: block !important;
@@ -60,22 +61,16 @@
       .navItems {
         list-style: none;
         text-align: center;
-
-        @include desktop {
-          display: flex;
-          align-items: center;
-          gap: 2em;
-        }
-
-        .divider {
-          display: block;
-          height: 1px;
-          width: 100%;
-          margin: 1em auto;
-          border-bottom: 2px solid #acc8e5;
+        .itemsWrapper {
+          display: inherit;
+          .item {
+            margin: 20px 0;
+          }
 
           @include desktop {
-            display: none;
+            display: flex;
+            align-items: center;
+            gap: 2em;
           }
         }
       }
