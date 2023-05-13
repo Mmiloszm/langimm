@@ -2,14 +2,13 @@
 
 import { register, signin } from "@/lib/api";
 import Image from "next/image";
-import { redirect } from "next/navigation";
 import React, { useCallback, useContext, useState } from "react";
 import styles from "@styles/auth/auth-form.module.scss";
 import { Button, TextField } from "@mui/material";
-import PrimaryButton from "../shared/buttons/PrimaryButton";
 import CustomIcon from "../shared/custom-icon/CustomIcon";
 import { UserContext } from "@/contexts/UserContext";
 import { LoadingButton } from "@mui/lab";
+import { redirect } from "next/navigation";
 
 const registerContent = {
   url: "/register",
@@ -47,7 +46,7 @@ const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
           const info = await signin(formState);
           if (info.refresh && info.access) {
             login({ refresh: info.refresh, access: info.access });
-            // router.replace("/dashboard");
+            redirect("/dashboard");
           } else {
             setError("Nie udało się poprawnie zalogować.");
           }
@@ -63,7 +62,7 @@ const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
         setLoading(false);
       }
     },
-    [formState.username, formState.password]
+    [formState, login, mode]
   );
 
   const content = mode === "register" ? registerContent : loginContent;
@@ -135,3 +134,4 @@ const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
 };
 
 export default AuthForm;
+

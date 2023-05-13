@@ -1,12 +1,35 @@
 /*this is reusable icon component created for using icons libraries in ssr components*/
 "use client";
 import {
+  AirplaneTilt,
+  Baby,
+  Bank,
   Basketball,
+  BookOpenText,
+  Calculator,
+  Campfire,
   CircleNotch,
   EnvelopeSimple,
+  Exam,
+  Funnel,
+  FunnelSimple,
+  Gear,
+  GenderFemale,
+  Globe,
+  Hamburger,
+  HandsPraying,
   Icon,
   IconProps,
+  Leaf,
   List,
+  NewspaperClipping,
+  Person,
+  PersonSimpleRun,
+  PhoneCall,
+  Question,
+  SignOut,
+  Student,
+  UserCircle,
   Warning,
   X,
 } from "@phosphor-icons/react";
@@ -25,6 +48,30 @@ const IconsList: ListOfIconsProps = {
   close: X,
   warning: Warning,
   loading: CircleNotch,
+  topic: BookOpenText,
+  settings: Gear,
+  signout: SignOut,
+  quiz: Exam,
+  filter: Funnel,
+  lifestyle: PersonSimpleRun,
+  politics: Bank,
+  entertainment: Campfire,
+  worldnews: NewspaperClipping,
+  travelculture: AirplaneTilt,
+  parenting: Baby,
+  minoritiesvoices: Person,
+  general: Globe,
+  religion: HandsPraying,
+  fooddrink: Hamburger,
+  business: PhoneCall,
+  sports: Basketball,
+  sciencetechnology: Calculator,
+  environment: Leaf,
+  women: GenderFemale,
+  education: Student,
+  unknown: Question,
+  sort: FunnelSimple,
+  user: UserCircle,
 };
 
 const CustomIcon = ({
@@ -48,3 +95,4 @@ const CustomIcon = ({
 };
 
 export default CustomIcon;
+

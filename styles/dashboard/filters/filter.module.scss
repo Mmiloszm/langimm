@@ -1,0 +1,130 @@
+@use "@/styles/variables";
+@use "@/styles/mixins" as *;
+
+.wrapper {
+  .button {
+    @include desktop {
+      display: none;
+    }
+  }
+  .filterOverlay {
+    z-index: 200;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: variables.$main-blue;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+
+    @include desktop {
+      display: flex !important;
+      position: static;
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      background-color: variables.$footer-blue;
+      overflow: hidden;
+    }
+
+    .closeIcon {
+      position: absolute;
+      top: 30px;
+      right: 35px;
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+
+      @include desktop {
+        display: none;
+      }
+    }
+
+    .overlayWrapper {
+      margin: 4em 2em;
+      height: 100%;
+
+      @include desktop {
+        display: flex;
+        width: 100%;
+      }
+
+      .filtersWrapper {
+        @include desktop {
+          width: 45%;
+        }
+        .header {
+          text-transform: uppercase;
+          color: white;
+          @include desktop {
+            font-size: 2rem;
+            color: variables.$dark-text;
+          }
+        }
+        .divider {
+          border: 1px solid white;
+          margin: 1.5em 0;
+          width: 90%;
+
+          @include desktop {
+            width: 75%;
+            border: 1px solid #acc8e5;
+          }
+        }
+        .list {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 1em;
+          list-style-type: none;
+
+          @include desktop {
+            flex-flow: column wrap;
+          }
+
+          @media (min-width: 992px) {
+            height: 30em;
+          }
+
+          @media (min-width: 1200px) {
+            height: 25em;
+          }
+
+          @media (min-width: 1600px) {
+            height: 15em;
+          }
+
+          .filterButton {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0.35em 0;
+            padding: 0.5em 1.1em;
+            border: 2px solid variables.$elements-blue;
+            border-radius: 100px;
+            color: white;
+            text-transform: lowercase;
+            font-weight: 500;
+            font-size: 1.1rem;
+
+            cursor: pointer;
+
+            @include desktop {
+              color: variables.$elements-blue;
+            }
+
+            .buttonText {
+              display: block;
+              margin-left: 10px;
+
+              @include desktop {
+                color: white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import Navbar from "@/components/shared/navbar/Navbar";
 import "@/styles/globals.css";
 
 export default function DashboardLayout({
@@ -5,5 +6,10 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <section>{children}</section>;
+  return (
+    <section>
+      <Navbar version="dashboard" />
+      {children}
+    </section>
+  );
 }
