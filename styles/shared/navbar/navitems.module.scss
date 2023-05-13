@@ -72,6 +72,17 @@
             align-items: center;
             gap: 2em;
           }
+          .desktopMenu {
+            @include desktop {
+              display: none;
+            }
+          }
+          .desktopMenuItems {
+            display: none;
+            @include desktop {
+              display: block;
+            }
+          }
         }
       }
     }

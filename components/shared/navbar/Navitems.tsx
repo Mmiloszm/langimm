@@ -4,7 +4,13 @@ import styles from "@styles/shared/navbar/navitems.module.scss";
 import PrimaryButton from "../buttons/PrimaryButton";
 import { useState } from "react";
 import CustomIcon from "../custom-icon/CustomIcon";
-import { Button } from "@mui/material";
+import {
+  Button,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
+} from "@mui/material";
 
 type NavitemsType = {
   version?: "default" | "dashboard";
@@ -12,6 +18,14 @@ type NavitemsType = {
 
 const Navitems = ({ version }: NavitemsType) => {
   const [display, setDisplay] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
   const handleDisplay = () => {
     const previous = display;
     previous
@@ -50,20 +64,16 @@ const Navitems = ({ version }: NavitemsType) => {
             {version === "default" && (
               <div className={styles.itemsWrapper}>
                 <li className={styles.item}>
-                  <Link href={"/signin"}>
-                    <Button
-                      sx={{ color: "white" }}
-                      variant="text"
-                      onClick={() => resetDisplay()}
-                    >
+                  <Link href={"/signin"} onClick={() => resetDisplay}>
+                    <PrimaryButton variants={["navButton", "transparent"]}>
                       zaloguj się
-                    </Button>
+                    </PrimaryButton>
                   </Link>
                 </li>
                 <li className={styles.item}>
-                  <Button variant="contained" onClick={() => resetDisplay()}>
+                  <PrimaryButton variants={["navButton", "navRegister"]}>
                     zarejestruj się
-                  </Button>
+                  </PrimaryButton>
                 </li>
               </div>
             )}
@@ -71,6 +81,7 @@ const Navitems = ({ version }: NavitemsType) => {
               <div className={styles.itemsWrapper}>
                 <li className={styles.item}>
                   <Button
+                    size="large"
                     sx={{ color: "white" }}
                     variant="text"
                     onClick={() => resetDisplay()}
@@ -79,7 +90,7 @@ const Navitems = ({ version }: NavitemsType) => {
                         name="quiz"
                         weight="regular"
                         color="white"
-                        size={24}
+                        size={32}
                         alt="quiz"
                       />
                     }
@@ -89,6 +100,7 @@ const Navitems = ({ version }: NavitemsType) => {
                 </li>
                 <li className={styles.item}>
                   <Button
+                    size="large"
                     sx={{ color: "white" }}
                     variant="text"
                     onClick={() => resetDisplay()}
@@ -97,7 +109,7 @@ const Navitems = ({ version }: NavitemsType) => {
                         name="topic"
                         weight="regular"
                         color="white"
-                        size={24}
+                        size={32}
                         alt="change topics"
                       />
                     }
@@ -105,8 +117,9 @@ const Navitems = ({ version }: NavitemsType) => {
                     wybór tematów
                   </Button>
                 </li>
-                <li className={styles.item}>
+                <li className={`${styles.item} ${styles.desktopMenu}`}>
                   <Button
+                    size="large"
                     sx={{ color: "white" }}
                     variant="text"
                     onClick={() => resetDisplay()}
@@ -115,7 +128,7 @@ const Navitems = ({ version }: NavitemsType) => {
                         name="settings"
                         weight="regular"
                         color="white"
-                        size={24}
+                        size={32}
                         alt="settings"
                       />
                     }
@@ -123,8 +136,9 @@ const Navitems = ({ version }: NavitemsType) => {
                     ustawienia
                   </Button>
                 </li>
-                <li className={styles.item}>
+                <li className={`${styles.item} ${styles.desktopMenu}`}>
                   <Button
+                    size="large"
                     sx={{ color: "white" }}
                     variant="text"
                     onClick={() => resetDisplay()}
@@ -133,13 +147,67 @@ const Navitems = ({ version }: NavitemsType) => {
                         name="signout"
                         weight="regular"
                         color="white"
-                        size={24}
+                        size={32}
                         alt="sign out"
                       />
                     }
                   >
                     wyloguj się
                   </Button>
+                </li>
+                <li className={`${styles.item} ${styles.desktopMenuItems}`}>
+                  <div>
+                    <IconButton
+                      id="positioned-button"
+                      aria-controls={open ? "positioned-menu" : undefined}
+                      aria-haspopup="true"
+                      aria-expanded={open ? "true" : undefined}
+                      onClick={handleMenuClick}
+                    >
+                      <CustomIcon
+                        name="user"
+                        size={48}
+                        color="white"
+                        alt="Open user settings"
+                        weight="regular"
+                      />
+                    </IconButton>
+                    <Menu
+                      id="positioned-menu"
+                      aria-labelledby="positioned-button"
+                      anchorEl={anchorEl}
+                      open={open}
+                      onClose={handleMenuClose}
+                      transformOrigin={{ horizontal: "right", vertical: "top" }}
+                      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+                    >
+                      <MenuItem onClick={handleMenuClose}>
+                        <ListItemIcon>
+                          <CustomIcon
+                            name="settings"
+                            weight="regular"
+                            color="#0359a4"
+                            size={32}
+                            alt="settings"
+                          />
+                        </ListItemIcon>
+                        Ustawienia
+                      </MenuItem>
+                      <MenuItem onClick={handleMenuClose}>
+                        <ListItemIcon>
+                          {" "}
+                          <CustomIcon
+                            name="signout"
+                            weight="regular"
+                            color="#0359a4"
+                            size={32}
+                            alt="sign out"
+                          />
+                        </ListItemIcon>
+                        Wyloguj się
+                      </MenuItem>
+                    </Menu>
+                  </div>
                 </li>
               </div>
             )}

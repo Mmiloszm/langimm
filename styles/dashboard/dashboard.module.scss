@@ -1,7 +1,38 @@
-.filtersWrapper {
-  padding-top: 9em;
+@use "@/styles/variables";
+@use "@/styles/mixins" as *;
+
+.contentWrapper {
   display: flex;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
-  justify-content: space-between;
+  flex-direction: column;
+  padding-top: 9em;
+  align-items: center;
+
+  .filtersWrapper {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @include desktop {
+      display: block;
+    }
+  }
+
+  .articlesWrapper {
+    width: 100%;
+    padding-top: 5em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 0 auto;
+
+    .infiniteScroll {
+      width: 100%;
+    }
+
+    @include desktop {
+      width: 80%;
+    }
+  }
 }

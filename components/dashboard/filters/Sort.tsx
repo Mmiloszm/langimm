@@ -1,30 +1,41 @@
 "use client";
 import styles from "@styles/dashboard/filters/sort.module.scss";
-import InputLabel from "@mui/material/InputLabel";
+
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useState } from "react";
 
-const Sort = () => {
-  const [sort, setSort] = useState("newest");
-  const handleChange = (event: SelectChangeEvent) => {
-    setSort(event.target.value);
-  };
+const Sort = ({
+  handleSortChange,
+  sort,
+}: {
+  handleSortChange: (event: SelectChangeEvent) => void;
+  sort: string;
+}) => {
   return (
     <div className={styles.selectWrapper}>
+      <span className={styles.text}>Sortuj:</span>
       <FormControl size="small">
-        <InputLabel id="select-sort">Sortuj</InputLabel>
         <Select
           labelId="select-sort"
           id="select"
           value={sort}
-          label="Sortuj"
-          onChange={handleChange}
+          onChange={handleSortChange}
+          sx={{
+            fontWeight: "medium",
+            textTransform: "none",
+            color: "primary.dark",
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "primary.dark",
+            },
+            "& .MuiSvgIcon-root": {
+              color: "primary.dark",
+            },
+          }}
         >
           <MenuItem value="newest">Nowości</MenuItem>
-          <MenuItem value="categories">Kategorie</MenuItem>
-          <MenuItem value="difficulty">Trudność</MenuItem>
+
+          <MenuItem value="nearest_difficulty">Trudność</MenuItem>
         </Select>
       </FormControl>
     </div>
