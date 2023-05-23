@@ -4,7 +4,7 @@ import { refreshToken } from "@/lib/api";
 import { createContext, useEffect, useState } from "react";
 
 type UserContextType = {
-  isAuthenticated: boolean;
+  isAuthenticated: boolean | null;
   login: ({ refresh, access }: { refresh: string; access: string }) => void;
   logout: () => void;
 };
@@ -20,7 +20,7 @@ export const UserContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<null | boolean>(null);
   const [isTokenRefreshed, setIsTokenRefreshed] = useState(false);
 
   useEffect(() => {

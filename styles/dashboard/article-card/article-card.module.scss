@@ -32,6 +32,14 @@
     @include desktop {
       height: 50%;
     }
+
+    background-color: #113e65;
+
+    .iconWrapper {
+      position: absolute;
+      margin-left: 50px;
+      transform: translateY(-1em);
+    }
   }
 
   .contentWrapper {

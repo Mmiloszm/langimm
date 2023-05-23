@@ -9,6 +9,7 @@ import CustomIcon from "../shared/custom-icon/CustomIcon";
 import { UserContext } from "@/contexts/UserContext";
 import { LoadingButton } from "@mui/lab";
 import { redirect } from "next/navigation";
+import BasicLoader from "../shared/loaders/BasicLoader";
 
 const registerContent = {
   url: "/register",
@@ -67,69 +68,93 @@ const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
 
   const content = mode === "register" ? registerContent : loginContent;
 
-  return isAuthenticated ? (
-    redirect("/dashboard")
-  ) : (
-    <div className={styles.authForm}>
-      <header className={styles.header}>
-        <Image src="/logo-dark.svg" height={100} width={128} alt="Logo" />
-        <h2 className={styles.greeter}>{content.header}</h2>
-      </header>
-      <form onSubmit={handleSubmit}>
-        <div className={styles.inputsWrapper}>
-          <TextField
-            value={formState.username}
-            id="outlined-username"
-            label="Nazwa użytkownika"
-            required
-            type="text"
-            onChange={(e) =>
-              setFormState((s) => ({ ...s, username: e.target.value }))
-            }
-            InputLabelProps={{ required: false }}
-          />
-          <div className={styles.hintInput}>
-            <TextField
-              value={formState.password}
-              InputLabelProps={{ required: false }}
-              onChange={(e) =>
-                setFormState((s) => ({ ...s, password: e.target.value }))
-              }
-              required
-              id="outlined-password-input"
-              label="Wpisz hasło"
-              type="password"
-              autoComplete="current-password"
-            />
-            {content.hint && (
-              <span className={styles.hint}>{content.hint}</span>
-            )}
-          </div>
+  return (
+    <>
+      {isAuthenticated === null ? (
+        <div className={styles.loaderWrapper}>
+          <BasicLoader />
         </div>
+      ) : (
+        <>
+          {isAuthenticated === true ? (
+            redirect("/dashboard")
+          ) : (
+            <div className={styles.authForm}>
+              <header className={styles.header}>
+                <Image
+                  src="/logo-dark.svg"
+                  height={100}
+                  width={128}
+                  alt="Logo"
+                />
+                <h2 className={styles.greeter}>{content.header}</h2>
+              </header>
+              <form onSubmit={handleSubmit}>
+                <div className={styles.inputsWrapper}>
+                  <TextField
+                    value={formState.username}
+                    id="outlined-username"
+                    label="Nazwa użytkownika"
+                    required
+                    type="text"
+                    onChange={(e) =>
+                      setFormState((s) => ({ ...s, username: e.target.value }))
+                    }
+                    InputLabelProps={{ required: false }}
+                  />
+                  <div className={styles.hintInput}>
+                    <TextField
+                      value={formState.password}
+                      InputLabelProps={{ required: false }}
+                      onChange={(e) =>
+                        setFormState((s) => ({
+                          ...s,
+                          password: e.target.value,
+                        }))
+                      }
+                      required
+                      id="outlined-password-input"
+                      label="Wpisz hasło"
+                      type="password"
+                      autoComplete="current-password"
+                    />
+                    {content.hint && (
+                      <span className={styles.hint}>{content.hint}</span>
+                    )}
+                  </div>
+                </div>
 
-        {error && (
-          <div className={styles.errorInfo}>
-            <CustomIcon
-              name="warning"
-              alt="warning icon"
-              color="red"
-              size={32}
-              weight="bold"
-              mirrored={false}
-            />
-            <span className={styles.errorText}>{error}</span>
-          </div>
-        )}
+                {error && (
+                  <div className={styles.errorInfo}>
+                    <CustomIcon
+                      name="warning"
+                      alt="warning icon"
+                      color="red"
+                      size={32}
+                      weight="bold"
+                      mirrored={false}
+                    />
+                    <span className={styles.errorText}>{error}</span>
+                  </div>
+                )}
 
-        <div className={styles.formButtons}>
-          <Button>{content.secondaryButton}</Button>
+                <div className={styles.formButtons}>
+                  <Button>{content.secondaryButton}</Button>
 
-          <LoadingButton type="submit" variant="contained" loading={loading}>
-            {content.primaryButton}
-          </LoadingButton>
-        </div>
-      </form>
-    </div>
+                  <LoadingButton
+                    type="submit"
+                    variant="contained"
+                    loading={loading}
+                  >
+                    {content.primaryButton}
+                  </LoadingButton>
+                </div>
+              </form>
+            </div>
+          )}
+        </>
+      )}
+    </>
   );
 };
 

@@ -1,3 +1,5 @@
+import { ArticlesQueryParamsType } from "@/types/ArticlesQueryParams";
+
 type FetcherProps = {
   url: string;
   method: "POST" | "GET";
@@ -8,14 +10,6 @@ type FetcherProps = {
 type UserProps = {
   username: string;
   password: string;
-};
-
-type ArticlesProps = {
-  languageId: number;
-  categoriesId: string;
-  sort?: "nearest_difficulty" | "newest";
-  limit: number;
-  offset: number;
 };
 
 const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
@@ -106,9 +100,11 @@ export const getArticles = async ({
   sort = "nearest_difficulty",
   limit,
   offset,
-}: ArticlesProps) => {
+}: ArticlesQueryParamsType) => {
   return fetcher({
-    url: `/api/articles?language_id=${languageId}&categories_id=${categoriesId}&sort=${sort}&limit=${limit}&offset=${offset}`,
+    url: `/api/articles?language_id=${languageId}&${
+      categoriesId ? `categories_id=${categoriesId}&` : ""
+    }sort=${sort}&limit=${limit}&offset=${offset}`,
     method: "GET",
     body: {},
     json: true,

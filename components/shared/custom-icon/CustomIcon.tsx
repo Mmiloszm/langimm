@@ -8,6 +8,8 @@ import {
   BookOpenText,
   Calculator,
   Campfire,
+  CaretLeft,
+  CaretRight,
   CircleNotch,
   EnvelopeSimple,
   Exam,
@@ -72,6 +74,8 @@ const IconsList: ListOfIconsProps = {
   unknown: Question,
   sort: FunnelSimple,
   user: UserCircle,
+  arrowforward: CaretRight,
+  arrowback: CaretLeft,
 };
 
 const CustomIcon = ({
