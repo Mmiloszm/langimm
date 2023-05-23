@@ -8,7 +8,9 @@ export default async function articles(
     const { language_id, categories_id, sort, offset, limit } = req.query;
     try {
       const articles = await fetch(
-        `http://localhost:8000/articles?language_id=${language_id}&categories_id=${categories_id}&sort=${sort}&offset=${offset}&limit=${limit}`,
+        `http://localhost:8000/articles?language_id=${language_id}&${
+          categories_id ? `categories_id=${categories_id}&` : ""
+        }&sort=${sort}&offset=${offset}&limit=${limit}`,
         {
           method: req.method,
           headers: { "Content-Type": "application/json" },

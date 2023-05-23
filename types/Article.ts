@@ -2,6 +2,7 @@ export type ArticleType = {
   id: number;
   title: string;
   excerpt: string;
+  difficulty: number;
   thumbnail: string | null;
   category: CategoryType;
 };

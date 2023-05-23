@@ -3,31 +3,14 @@ import CustomIcon from "@/components/shared/custom-icon/CustomIcon";
 import { CategoryType } from "@/types/Article";
 import styles from "@styles/dashboard/article-card/category-badge.module.scss";
 import { useState } from "react";
+import { colors } from "@/lib/badge-colors";
 
-const colors = [
-  { color: "#FFA704", name: "LIFESTYLE", iconName: "lifestyle" },
-  { color: "#D22B2B", name: "POLITICS", iconName: "politics" },
-  { color: "#CF9FFF", name: "ENTERTAINMENT", iconName: "entertainment" },
-  { color: "#5D3FD3", name: "WORLD NEWS", iconName: "worldnews" },
-  { color: "#009E60", name: "TRAVEL & CULTURE", iconName: "travelculture" },
-  { color: "#CC7722", name: "PARENTING", iconName: "parenting" },
-  { color: "#40B5AD", name: "MINORITIES VOICES", iconName: "minoritiesvoices" },
-  { color: "#191970", name: "GENERAL", iconName: "general" },
-  { color: "#B87333", name: "RELIGION", iconName: "religion" },
-  { color: "#E4D00A", name: "FOOD & DRINK", iconName: "fooddrink" },
-  { color: "#C9CC3F", name: "BUSINESS", iconName: "business" },
-  { color: "#00FF7F", name: "SPORTS", iconName: "sports" },
-  {
-    color: "#6082B6",
-    name: "SCIENCE & TECHNOLOGY",
-    iconName: "sciencetechnology",
-  },
-  { color: "#04D13A", name: "ENVIRONMENT", iconName: "environment" },
-  { color: "#FF7F50", name: "WOMEN", iconName: "women" },
-  { color: "#8E44AD", name: "EDUCATION", iconName: "education" },
-];
+type CategoryBadgePropsType = {
+  name: string;
+  difficulty: number;
+};
 
-const CategoryBadge = ({ name, id }: CategoryType) => {
+const CategoryBadge = ({ name, difficulty }: CategoryBadgePropsType) => {
   const [category, _] = useState(() => {
     const category = colors.find((entry) => {
       if (entry.name === name) {
@@ -44,8 +27,21 @@ const CategoryBadge = ({ name, id }: CategoryType) => {
       };
     }
   });
+
+  const getBadgeColor = (level: number) => {
+    if (level >= 0.8) {
+      return "#EF1346";
+    } else if (level >= 0.4) {
+      return "#FF7C14";
+    } else {
+      return "#10D132";
+    }
+  };
   return (
-    <div className={styles.badge} style={{ backgroundColor: category.color }}>
+    <div
+      className={styles.badge}
+      style={{ backgroundColor: getBadgeColor(difficulty) }}
+    >
       <span className={styles.iconWrapper}>
         <CustomIcon
           name={category.iconName}

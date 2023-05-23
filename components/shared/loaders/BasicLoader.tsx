@@ -1,5 +1,5 @@
-import styles from "@styles/dashboard/article-card/article-loader.module.scss";
-const ArticleLoader = () => {
+import styles from "@styles/shared/loaders/basic-loader.module.scss";
+const BasicLoader = () => {
   return (
     <div className={styles.ldsEllipsis}>
       <div className={styles.circle}></div>
@@ -10,4 +10,4 @@ const ArticleLoader = () => {
   );
 };
 
-export default ArticleLoader;
+export default BasicLoader;

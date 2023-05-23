@@ -123,16 +123,6 @@ const Filter = ({
                             setLanguages(updated);
                           }}
                         >
-                          {language.active && (
-                            <CustomIcon
-                              name="close"
-                              color="white"
-                              weight="bold"
-                              alt="close"
-                              size={20}
-                            />
-                          )}
-
                           <span
                             className={`${
                               language.active ? styles.buttonText : ""
@@ -172,16 +162,6 @@ const Filter = ({
                             setCategories(updated);
                           }}
                         >
-                          {category.active && (
-                            <CustomIcon
-                              name="close"
-                              color="white"
-                              weight="bold"
-                              alt="close"
-                              size={20}
-                            />
-                          )}
-
                           <span
                             className={`${
                               category.active ? styles.buttonText : ""

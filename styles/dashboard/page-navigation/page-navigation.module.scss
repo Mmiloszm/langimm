@@ -1,0 +1,13 @@
+@use "@/styles/variables";
+@use "@/styles/mixins" as *;
+
+.navigateButtons {
+  display: flex;
+  margin-bottom: 2.5em;
+  justify-content: space-between;
+  width: 60%;
+
+  @include desktop {
+    width: 40%;
+  }
+}
