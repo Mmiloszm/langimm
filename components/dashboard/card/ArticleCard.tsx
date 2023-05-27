@@ -4,6 +4,7 @@ import styles from "@styles/dashboard/article-card/article-card.module.scss";
 import CategoryBadge from "./CategoryBadge";
 import CustomIcon from "@/components/shared/custom-icon/CustomIcon";
 import { colors } from "@/lib/badge-colors";
+import Link from "next/link";
 
 const ArticleCard = ({
   id,
@@ -13,6 +14,9 @@ const ArticleCard = ({
   category,
   difficulty,
 }: ArticleType) => {
+  const url = process.env.NEXT_PUBLIC_BACKEND_URL
+    ? process.env.NEXT_PUBLIC_BACKEND_URL
+    : "http://localhost:8000";
   const truncateExcerpt = (toTruncate: string) => {
     if (toTruncate.length > 192) {
       const truncatedString = toTruncate.slice(0, 192).trim();
@@ -37,32 +41,34 @@ const ArticleCard = ({
     return "unknown";
   };
   return (
-    <div className={styles.cardWrapper}>
-      <div className={styles.imageWrapper}>
-        <CategoryBadge name={category.name} difficulty={difficulty} />
-        {thumbnail ? (
-          <Image
-            alt="article thumbnail"
-            src={`http://127.0.0.1:8000${thumbnail}`}
-            fill={true}
-          />
-        ) : (
-          <div className={styles.iconWrapper}>
-            <CustomIcon
-              name={getIconName()}
-              size={220}
-              color="#194E7C"
-              weight="bold"
-              alt={category.name}
+    <Link href={`/article/${id}`} passHref className={styles.link}>
+      <div className={styles.cardWrapper}>
+        <div className={styles.imageWrapper}>
+          <CategoryBadge name={category.name} difficulty={difficulty} />
+          {thumbnail ? (
+            <Image
+              alt="article thumbnail"
+              src={`${url}${thumbnail}`}
+              fill={true}
             />
-          </div>
-        )}
+          ) : (
+            <div className={styles.iconWrapper}>
+              <CustomIcon
+                name={getIconName()}
+                size={220}
+                color="#194E7C"
+                weight="bold"
+                alt={category.name}
+              />
+            </div>
+          )}
+        </div>
+        <div className={styles.contentWrapper}>
+          <h3 className={styles.title}>{title}</h3>
+          <p className={styles.excerpt}>{truncateExcerpt(excerpt)}</p>
+        </div>
       </div>
-      <div className={styles.contentWrapper}>
-        <h3 className={styles.title}>{title}</h3>
-        <p className={styles.excerpt}>{truncateExcerpt(excerpt)}</p>
-      </div>
-    </div>
+    </Link>
   );
 };
 

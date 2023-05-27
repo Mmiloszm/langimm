@@ -1,6 +1,12 @@
 "use client";
 import { UserContext } from "@/contexts/UserContext";
-import { getArticles, getCategories, getLanguages } from "@/lib/api";
+import {
+  getArticles,
+  getCategories,
+  getLanguages,
+  getPreferences,
+  updatePreferences,
+} from "@/lib/api";
 import { ArticleType } from "@/types/Article";
 import {
   LanguagesAndCategoriesRawType,
@@ -14,10 +20,14 @@ import ArticleCard from "./card/ArticleCard";
 import BasicLoader from "../shared/loaders/BasicLoader";
 import Filter from "./filters/Filter";
 import Sort from "./filters/Sort";
-import Fab from "@mui/material/Fab";
-import CustomIcon from "../shared/custom-icon/CustomIcon";
 import PageNavigation from "./page-navigation/PageNavigation";
 import { ArticlesQueryParamsType } from "@/types/ArticlesQueryParams";
+import Link from "next/link";
+
+type PreferencesRawType = {
+  languages: LanguagesAndCategoriesRawType[] & { experience: number };
+  categories: LanguagesAndCategoriesRawType[];
+};
 
 const Dashboard = () => {
   const { isAuthenticated } = useContext(UserContext);
@@ -42,36 +52,39 @@ const Dashboard = () => {
 
   const [articles, setArticles] = useState<ArticleType[]>();
   const [page, setPage] = useState(1);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      const categoriesRaw: LanguagesAndCategoriesRawType[] =
-        await getCategories();
-      if (categoriesRaw) {
-        const newCategories = categoriesRaw.map((category) => {
-          return { ...category, active: false };
-        });
-        setCategories(newCategories);
-      }
-    };
+    const fetchPreferences = async () => {
+      const token = localStorage.getItem("access");
+      if (token) {
+        const preferencesRaw: PreferencesRawType = await getPreferences(token);
+        if (preferencesRaw) {
+          const newCategories = preferencesRaw.categories.map((category) => {
+            return { ...category, active: false };
+          });
+          const newLanguages = preferencesRaw.languages.map(
+            (language, index) => {
+              if (index === 0) {
+                return { ...language, active: true };
+              }
+              return { ...language, active: false };
+            }
+          );
 
-    const fetchLanguages = async () => {
-      const languagesRaw: LanguagesAndCategoriesRawType[] =
-        await getLanguages();
-      if (languagesRaw) {
-        const newLanguages = languagesRaw.map((language) => {
-          if (language.name === "ENGLISH") {
-            return { ...language, active: true };
+          if (newLanguages.length < 1) {
+            setIsEmpty(true);
           }
-          return { ...language, active: false };
-        });
-        setLanguages(newLanguages);
+          setCategories(newCategories);
+          setLanguages(newLanguages);
+        }
       }
     };
 
-    fetchCategories();
-    fetchLanguages();
-  }, []);
+    if (isAuthenticated) {
+      fetchPreferences();
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -136,6 +149,7 @@ const Dashboard = () => {
   const handleSortChange = (event: SelectChangeEvent) => {
     setSort(event.target.value as "nearest_difficulty" | "newest");
   };
+
   return (
     <div>
       {isAuthenticated === null ? (
@@ -148,15 +162,29 @@ const Dashboard = () => {
             redirect("/")
           ) : (
             <>
-              <section className={styles.filtersWrapper}>
-                <Filter
-                  categories={categories}
-                  setCategories={setCategories}
-                  languages={languages}
-                  setLanguages={setLanguages}
-                />
-                <Sort sort={sort} handleSortChange={handleSortChange} />
-              </section>
+              {!isEmpty ? (
+                <>
+                  <section className={styles.filtersWrapper}>
+                    <Filter
+                      categories={categories}
+                      setCategories={setCategories}
+                      languages={languages}
+                      setLanguages={setLanguages}
+                    />
+                    <Sort sort={sort} handleSortChange={handleSortChange} />
+                  </section>
+                </>
+              ) : (
+                <div className={styles.emptyPreferences}>
+                  <p className={styles.emptyText}>
+                    Narazie nic tu nie ma... Kliknij{" "}
+                    <Link href={"/preferences"} className={styles.link}>
+                      tutaj
+                    </Link>{" "}
+                    aby ustawić preferencje.{" "}
+                  </p>
+                </div>
+              )}
 
               {articles && !areArticlesLoading ? (
                 <>
@@ -186,7 +214,7 @@ const Dashboard = () => {
                   />
                 </>
               ) : (
-                <BasicLoader />
+                <>{isEmpty && <BasicLoader />}</>
               )}
             </>
           )}

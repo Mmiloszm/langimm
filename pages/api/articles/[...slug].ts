@@ -1,23 +1,23 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function signin(
+export default async function articleDetails(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const url = process.env.NEXT_PUBLIC_BACKEND_URL
     ? process.env.NEXT_PUBLIC_BACKEND_URL
     : "http://localhost:8000";
-  if (req.method === "POST") {
+  if (req.method === "GET") {
     try {
-      const user = await fetch(`${url}/user/token/`, {
+      const { slug } = req.query;
+      const articleDetails = await fetch(`${url}/articles/${slug}`, {
         method: req.method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(req.body),
       });
-      const userData = await user.json();
-      res.status(201).json(userData);
+      const articleDetailsData = await articleDetails.json();
+      res.status(201).json(articleDetailsData);
     } catch (err) {
-      res.status(501).json({ error: "failed to login" });
+      res.status(501).json({ error: "failed to fetch article's details" });
     }
   } else {
     res.status(402);

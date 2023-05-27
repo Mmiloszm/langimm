@@ -99,23 +99,25 @@ const Navitems = ({ version }: NavitemsType) => {
                   </Button>
                 </li>
                 <li className={styles.item}>
-                  <Button
-                    size="large"
-                    sx={{ color: "white" }}
-                    variant="text"
-                    onClick={() => resetDisplay()}
-                    startIcon={
-                      <CustomIcon
-                        name="topic"
-                        weight="regular"
-                        color="white"
-                        size={32}
-                        alt="change topics"
-                      />
-                    }
-                  >
-                    wybór tematów
-                  </Button>
+                  <Link href="/preferences" passHref>
+                    <Button
+                      size="large"
+                      sx={{ color: "white" }}
+                      variant="text"
+                      onClick={() => resetDisplay()}
+                      startIcon={
+                        <CustomIcon
+                          name="topic"
+                          weight="regular"
+                          color="white"
+                          size={32}
+                          alt="change topics"
+                        />
+                      }
+                    >
+                      wybór tematów
+                    </Button>
+                  </Link>
                 </li>
                 <li className={`${styles.item} ${styles.desktopMenu}`}>
                   <Button

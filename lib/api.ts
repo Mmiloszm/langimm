@@ -1,4 +1,5 @@
 import { ArticlesQueryParamsType } from "@/types/ArticlesQueryParams";
+import { PreferencesType } from "@/types/Preferences";
 
 type FetcherProps = {
   url: string;
@@ -94,6 +95,15 @@ export const getLanguages = async () => {
   });
 };
 
+export const getArticleDetails = async (articleId: number) => {
+  return fetcher({
+    url: `/api/articles/${articleId}`,
+    method: "GET",
+    body: {},
+    json: true,
+  });
+};
+
 export const getArticles = async ({
   languageId,
   categoriesId,
@@ -107,6 +117,27 @@ export const getArticles = async ({
     }sort=${sort}&limit=${limit}&offset=${offset}`,
     method: "GET",
     body: {},
+    json: true,
+  });
+};
+
+export const getPreferences = async (token: string) => {
+  return fetcher({
+    url: `/api/preferences?token=${token}`,
+    method: "GET",
+    body: {},
+    json: true,
+  });
+};
+
+export const updatePreferences = async (
+  token: string,
+  preferencesBody: PreferencesType
+) => {
+  return fetcher({
+    url: `/api/updatePreferences?token=${token}`,
+    method: "POST",
+    body: preferencesBody,
     json: true,
   });
 };
