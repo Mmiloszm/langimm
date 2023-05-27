@@ -12,7 +12,7 @@ import { PreferencesType } from "@/types/Preferences";
 import DifficultyForm from "./difficulty-form/DifficultyForm";
 import BasicLoader from "../shared/loaders/BasicLoader";
 import TopicsForm from "./topics-form/TopicsForm";
-import { getCategories, getLanguages } from "@/lib/api";
+import { getCategories, getLanguages, getPreferences } from "@/lib/api";
 import { UserContext } from "@/contexts/UserContext";
 
 export type FormType = "languages" | "difficulty" | "topics";
@@ -31,6 +31,9 @@ const PreferencesForm = () => {
     languages: [],
     categories: [],
   });
+  const [currentlyPreferences, setCurrentlyPreferences] = useState<
+    PreferencesType | undefined
+  >();
 
   useEffect(() => {
     const fetchLanguages = async () => {
@@ -55,8 +58,22 @@ const PreferencesForm = () => {
       }
     };
 
+    const fetchCurrentlyPreferences = async () => {
+      const token = localStorage.getItem("access");
+      if (token) {
+        const currentlyPreferencesRaw: PreferencesType = await getPreferences(
+          token
+        );
+        if (currentlyPreferencesRaw) {
+          console.log(currentlyPreferencesRaw);
+          setCurrentlyPreferences(currentlyPreferencesRaw);
+        }
+      }
+    };
+
     fetchLanguages();
     fetchCategories();
+    fetchCurrentlyPreferences();
   }, []);
 
   useEffect(() => {
@@ -142,6 +159,7 @@ const PreferencesForm = () => {
                     form={form}
                     setForm={setForm}
                     preferences={preferences}
+                    currentlyPreferences={currentlyPreferences}
                   />
                 </div>
               )}

@@ -3,7 +3,7 @@ export type PreferencesType = {
   categories: CategoryType[];
 };
 
-type LanguageType = {
+export type LanguageType = {
   id: number | null;
   experience: number | null;
 };
