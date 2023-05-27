@@ -4,11 +4,14 @@ export default async function articles(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const url = process.env.NEXT_PUBLIC_BACKEND_URL
+    ? process.env.NEXT_PUBLIC_BACKEND_URL
+    : "http://localhost:8000";
   if (req.method === "GET") {
     const { language_id, categories_id, sort, offset, limit } = req.query;
     try {
       const articles = await fetch(
-        `http://localhost:8000/articles?language_id=${language_id}&${
+        `${url}/articles?language_id=${language_id}&${
           categories_id ? `categories_id=${categories_id}&` : ""
         }&sort=${sort}&offset=${offset}&limit=${limit}`,
         {

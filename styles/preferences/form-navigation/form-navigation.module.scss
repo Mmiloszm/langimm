@@ -1,0 +1,14 @@
+@use "@/styles/mixins" as *;
+
+.buttonsWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-top: 3em;
+
+  @include desktop {
+    width: 50%;
+    margin-bottom: 3em;
+  }
+}

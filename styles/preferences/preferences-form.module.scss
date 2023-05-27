@@ -1,0 +1,13 @@
+@use "@/styles/variables";
+@use "@/styles/mixins" as *;
+
+.contentWrapper {
+  width: 95%;
+  padding-top: 8em;
+  margin: 0 auto;
+
+  .loaderWrapper {
+    display: flex;
+    justify-content: center;
+  }
+}

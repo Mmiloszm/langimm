@@ -1,0 +1,122 @@
+@use "@/styles/variables";
+@use "@/styles/mixins" as *;
+
+.contentWrapper {
+  .formHeader {
+    font-weight: 500;
+    color: variables.$dark-text;
+    text-align: center;
+    @include desktop {
+      font-size: 2rem;
+    }
+  }
+
+  .itemsWrapper {
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include desktop {
+      width: 80%;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 8em auto;
+    }
+
+    .item {
+      width: 95%;
+      height: 4em;
+      display: flex;
+      padding-left: 1em;
+      gap: 15px;
+      align-items: center;
+      border-top: 2px solid variables.$background-blue;
+      border-right: 2px solid variables.$background-blue;
+      border-left: 2px solid variables.$background-blue;
+      cursor: pointer;
+      background-color: transparent;
+      box-shadow: none;
+      outline: none;
+      border-bottom: none;
+
+      @include desktop {
+        width: 20em;
+        height: 20em;
+        border: 2px solid variables.$background-blue;
+        border-radius: 12px;
+        flex-direction: column;
+      }
+
+      .itemName {
+        color: variables.$dark-text;
+        font-size: 1rem;
+
+        @include desktop {
+          font-size: 1.5rem;
+        }
+      }
+
+      .imageWrapper {
+        position: relative;
+        width: 3.5em;
+        height: 2em;
+
+        @include desktop {
+          width: 18em;
+          height: 12em;
+        }
+      }
+
+      .iconWrapper {
+        background-color: variables.$background-blue;
+        height: 3em;
+        width: 3em;
+        border-radius: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @include desktop {
+          height: 8em;
+          width: 8em;
+          margin-top: 2em;
+        }
+
+        .icon {
+          font-size: 1rem;
+          font-weight: bold;
+          color: white;
+          @include desktop {
+            font-size: 2rem;
+          }
+        }
+      }
+      .activeIcon {
+        background-color: variables.$dark-text;
+      }
+    }
+
+    .firstItem {
+      border-radius: 8px 8px 0 0;
+
+      @include desktop {
+        border-radius: 12px;
+      }
+    }
+
+    .lastItem {
+      border-bottom: 2px solid variables.$background-blue;
+      border-radius: 0 0 8px 8px;
+
+      @include desktop {
+        border-radius: 12px;
+      }
+    }
+
+    .active {
+      background-color: variables.$footer-blue;
+      font-weight: bold;
+    }
+  }
+}

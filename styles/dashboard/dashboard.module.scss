@@ -19,6 +19,34 @@
     }
   }
 
+  .emptyPreferences {
+    margin: 1em;
+    background-color: variables.$background-blue;
+    width: 90%;
+    height: 10em;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 2em;
+
+    @include desktop {
+      width: 40%;
+    }
+
+    .emptyText {
+      color: variables.$dark-text;
+      font-weight: 500;
+      font-size: 1.2rem;
+
+      .link {
+        text-decoration: none;
+        color: variables.$dark-text;
+        font-weight: bold;
+      }
+    }
+  }
+
   .articlesWrapper {
     width: 100%;
     padding-top: 5em;

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function signin(
+export default async function updatePreferences(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -8,16 +8,21 @@ export default async function signin(
     ? process.env.NEXT_PUBLIC_BACKEND_URL
     : "http://localhost:8000";
   if (req.method === "POST") {
+    const { token } = req.query;
     try {
-      const user = await fetch(`${url}/user/token/`, {
+      const response = await fetch(`${url}/user/preferences/`, {
         method: req.method,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          // prettier-ignore
+          "Authorization": `Bearer ${token}`,
+        },
         body: JSON.stringify(req.body),
       });
-      const userData = await user.json();
+      const userData = await response.json();
       res.status(201).json(userData);
     } catch (err) {
-      res.status(501).json({ error: "failed to login" });
+      res.status(501).json({ error: "failed to refresh token" });
     }
   } else {
     res.status(402);
