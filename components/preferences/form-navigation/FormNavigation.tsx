@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import styles from "@styles/preferences/form-navigation/form-navigation.module.scss";
 import { Dispatch, SetStateAction, useState } from "react";
 import { FormType } from "../PreferencesForm";
-import { PreferencesType } from "@/types/Preferences";
+import { LanguageType, PreferencesType } from "@/types/Preferences";
 import { updatePreferences } from "@/lib/api";
 import { LoadingButton } from "@mui/lab";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ type FormNavigationPropsType = {
   form: FormType;
   setForm: Dispatch<SetStateAction<FormType>>;
   preferences?: PreferencesType;
+  currentlyPreferences?: PreferencesType;
 };
 
 const FormNavigation = ({
@@ -20,6 +21,7 @@ const FormNavigation = ({
   form,
   setForm,
   preferences,
+  currentlyPreferences,
 }: FormNavigationPropsType) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -47,11 +49,41 @@ const FormNavigation = ({
     }
   };
 
+  const changePreferences = () => {
+    if (currentlyPreferences && preferences) {
+      let newLanguages: LanguageType[] = [];
+      const currentlyLanguage = preferences.languages[0];
+      if (currentlyPreferences.languages) {
+        newLanguages = currentlyPreferences.languages.map((language) => {
+          if (language.id === currentlyLanguage.id) {
+            return currentlyLanguage;
+          }
+          return language;
+        });
+      } else {
+        newLanguages = [currentlyLanguage];
+      }
+
+      const checkIfLanguageAdded = newLanguages.find((language) => {
+        return language.id === currentlyLanguage.id;
+      });
+      if (!checkIfLanguageAdded) {
+        newLanguages = [...newLanguages, currentlyLanguage];
+      }
+      const newPreferences: PreferencesType = {
+        languages: newLanguages,
+        categories: preferences.categories,
+      };
+      return newPreferences;
+    }
+  };
+
   const submitForm = async () => {
+    const newPreferences = changePreferences();
     const token = localStorage.getItem("access");
-    if (token && preferences) {
+    if (token && newPreferences) {
       setIsLoading(true);
-      const res = await updatePreferences(token, preferences);
+      const res = await updatePreferences(token, newPreferences);
       if (res.success === true) {
         setIsLoading(false);
         router.push("/dashboard");
