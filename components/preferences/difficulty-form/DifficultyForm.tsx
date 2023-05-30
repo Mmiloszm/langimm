@@ -2,21 +2,33 @@ import styles from "@styles/preferences/difficulties-form/difficulties-form.modu
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 import { initialDifficulties } from "@/lib/constants/initialDifficulties";
+import { PreferencesType } from "@/types/Preferences";
+import { LanguagesAndCategoriesType } from "@/types/LanguageAndCategory";
 
 type DifficultyFormPropsType = {
   selectedDifficulty: number | null;
   setDifficulty: Dispatch<SetStateAction<number | null>>;
+  preferencesDifficulty?: number | null;
 };
 
 const DifficultyForm = ({
   setDifficulty,
   selectedDifficulty,
+  preferencesDifficulty,
 }: DifficultyFormPropsType) => {
   const [difficulties, setDifficulties] = useState(
     initialDifficulties.map((difficulty) => {
-      if (difficulty.value === selectedDifficulty) {
-        return { ...difficulty, active: true };
+      if (selectedDifficulty) {
+        if (difficulty.value === selectedDifficulty) {
+          return { ...difficulty, active: true };
+        }
+      } else if (preferencesDifficulty) {
+        if (difficulty.value === preferencesDifficulty) {
+          setDifficulty(preferencesDifficulty);
+          return { ...difficulty, active: true };
+        }
       }
+
       return difficulty;
     })
   );
