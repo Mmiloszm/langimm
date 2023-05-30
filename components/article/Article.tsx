@@ -88,21 +88,31 @@ const Article = ({ articleId }: { articleId: number }) => {
           })}
           {article.images &&
             article.images.map((image) => {
-              if (image.paragraph_id === null) {
+              if (
+                image.paragraph_id === null &&
+                image.image !== article.thumbnail
+              ) {
                 return (
-                  <div key={image.paragraph_id} className={styles.imageWrapper}>
-                    <div
-                      className={styles.thumbnailWrapper}
-                      key={image.paragraph_id}
-                    >
-                      <Image
-                        alt="article thumbnail"
-                        src={`${url}${article.thumbnail}`}
-                        fill={true}
-                      />
-                      {image.caption && (
-                        <span className={styles.caption}>{image.caption}</span>
-                      )}
+                  <div
+                    key={image.paragraph_id}
+                    className={styles.paragraphWrapper}
+                  >
+                    <div className={styles.imageWrapper}>
+                      <div
+                        className={styles.thumbnailWrapper}
+                        key={image.paragraph_id}
+                      >
+                        <Image
+                          alt="article thumbnail"
+                          src={`${url}${article.thumbnail}`}
+                          fill={true}
+                        />
+                        {image.caption && (
+                          <span className={styles.caption}>
+                            {image.caption}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );

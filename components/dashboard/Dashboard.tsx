@@ -59,8 +59,16 @@ const Dashboard = () => {
       const token = localStorage.getItem("access");
       if (token) {
         const preferencesRaw: PreferencesRawType = await getPreferences(token);
-        if (preferencesRaw) {
-          const newCategories = preferencesRaw.categories.map((category) => {
+        const categoriesRaw: LanguagesAndCategoriesRawType[] =
+          await getCategories();
+        if (preferencesRaw && categoriesRaw) {
+          const newCategories = categoriesRaw.map((category) => {
+            const foundCategory = preferencesRaw.categories.find((item) => {
+              return item.id === category.id;
+            });
+            if (foundCategory) {
+              return { ...category, active: true };
+            }
             return { ...category, active: false };
           });
           const newLanguages = preferencesRaw.languages.map(
@@ -214,7 +222,7 @@ const Dashboard = () => {
                   />
                 </>
               ) : (
-                <>{isEmpty && <BasicLoader />}</>
+                <>{!isEmpty && <BasicLoader />}</>
               )}
             </>
           )}

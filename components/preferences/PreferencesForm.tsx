@@ -47,33 +47,34 @@ const PreferencesForm = () => {
       }
     };
 
-    const fetchCategories = async () => {
-      const categoriesRaw: LanguagesAndCategoriesRawType[] =
-        await getCategories();
-      if (categoriesRaw) {
-        const newCategories = categoriesRaw.map((category) => {
-          return { ...category, active: false };
-        });
-        setCategories(newCategories);
-      }
-    };
-
-    const fetchCurrentlyPreferences = async () => {
+    const fetchCurrentlyPreferencesWithCategories = async () => {
       const token = localStorage.getItem("access");
       if (token) {
         const currentlyPreferencesRaw: PreferencesType = await getPreferences(
           token
         );
-        if (currentlyPreferencesRaw) {
-          console.log(currentlyPreferencesRaw);
+        const categoriesRaw: LanguagesAndCategoriesRawType[] =
+          await getCategories();
+        if (currentlyPreferencesRaw && categoriesRaw) {
+          const newCategories = categoriesRaw.map((category) => {
+            const isAssigned = currentlyPreferencesRaw.categories.find(
+              (pref) => {
+                return pref.id === category.id;
+              }
+            );
+            if (isAssigned) {
+              return { ...category, active: true };
+            }
+            return { ...category, active: false };
+          });
+          setCategories(newCategories);
           setCurrentlyPreferences(currentlyPreferencesRaw);
         }
       }
     };
 
     fetchLanguages();
-    fetchCategories();
-    fetchCurrentlyPreferences();
+    fetchCurrentlyPreferencesWithCategories();
   }, []);
 
   useEffect(() => {
@@ -93,6 +94,21 @@ const PreferencesForm = () => {
       setPreferences(newPreferences);
     }
   }, [languages, difficulty, categories]);
+
+  const findIfSelectedDifficulty = () => {
+    if (preferences && currentlyPreferences) {
+      const selectedLanguage = preferences.languages[0];
+      if (selectedLanguage) {
+        const currentDifficulty = currentlyPreferences.languages.find(
+          (language) => {
+            return language.id === selectedLanguage.id;
+          }
+        );
+        return currentDifficulty ? currentDifficulty.experience : null;
+      }
+    }
+    return null;
+  };
 
   return (
     <div className={styles.contentWrapper}>
@@ -134,6 +150,7 @@ const PreferencesForm = () => {
                   <DifficultyForm
                     setDifficulty={setDifficulty}
                     selectedDifficulty={difficulty}
+                    preferencesDifficulty={findIfSelectedDifficulty()}
                   />
                   <FormNavigation
                     canGoFurther={
