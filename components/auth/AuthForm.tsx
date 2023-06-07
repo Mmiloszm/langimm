@@ -8,8 +8,8 @@ import { Button, TextField } from "@mui/material";
 import CustomIcon from "../shared/custom-icon/CustomIcon";
 import { UserContext } from "@/contexts/UserContext";
 import { LoadingButton } from "@mui/lab";
-import { redirect } from "next/navigation";
 import BasicLoader from "../shared/loaders/BasicLoader";
+import { useRouter } from "next/navigation";
 
 const registerContent = {
   url: "/register",
@@ -34,6 +34,7 @@ const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
   const [formState, setFormState] = useState({ ...initial });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const router = useRouter();
   const handleSubmit = useCallback(
     async (e: React.SyntheticEvent) => {
       e.preventDefault();
@@ -47,7 +48,7 @@ const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
           const info = await signin(formState);
           if (info.refresh && info.access) {
             login({ refresh: info.refresh, access: info.access });
-            redirect("/dashboard");
+            router.replace("/dashboard");
           } else {
             setError("Nie udało się poprawnie zalogować.");
           }
@@ -63,7 +64,7 @@ const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
         setLoading(false);
       }
     },
-    [formState, login, mode]
+    [formState, login, mode, router]
   );
 
   const content = mode === "register" ? registerContent : loginContent;
@@ -77,7 +78,7 @@ const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
       ) : (
         <>
           {isAuthenticated === true ? (
-            redirect("/dashboard")
+            router.replace("/dashboard")
           ) : (
             <div className={styles.authForm}>
               <header className={styles.header}>

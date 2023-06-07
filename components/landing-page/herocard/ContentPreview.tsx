@@ -25,8 +25,7 @@ const ContentPreview = ({ title, subtitle, image }: ContentPreviewProps) => {
           <Image
             alt={image.alt}
             src={image.url}
-            height={245}
-            width={300}
+            fill={true}
           ></Image>
         </div>
       ) : (
@@ -42,70 +41,70 @@ const ContentPreview = ({ title, subtitle, image }: ContentPreviewProps) => {
           </div>
           <div className={styles.topicContainer}>
             <CustomIcon
-              name="basketball"
+              name="travelculture"
               size={24}
               color="white"
               weight="bold"
             />
-            <span className={styles.topicName}>Sport</span>
+            <span className={styles.topicName}>Podróże</span>
           </div>
           <div className={styles.topicContainer}>
             <CustomIcon
-              name="basketball"
+              name="fooddrink"
               size={24}
               color="white"
               weight="bold"
             />
-            <span className={styles.topicName}>Sport</span>
+            <span className={styles.topicName}>Jedzenie</span>
           </div>
           <div className={styles.topicContainer}>
             <CustomIcon
-              name="basketball"
+              name="business"
               size={24}
               color="white"
               weight="bold"
             />
-            <span className={styles.topicName}>Sport</span>
+            <span className={styles.topicName}>Biznes</span>
           </div>
           <div className={styles.topicContainer}>
             <CustomIcon
-              name="basketball"
+              name="sciencetechnology"
               size={24}
               color="white"
               weight="bold"
             />
-            <span className={styles.topicName}>Sport</span>
+            <span className={styles.topicName}>Technologie</span>
           </div>
           <div className={styles.topicContainer}>
             <CustomIcon
-              name="basketball"
+              name="environment"
               size={24}
               color="white"
               weight="bold"
             />
-            <span className={styles.topicName}>Sport</span>
+            <span className={styles.topicName}>Środowisko</span>
           </div>
           <div
             className={`${styles.topicContainer} ${styles.desktopContainer}`}
           >
             <CustomIcon
-              name="basketball"
+              name="education"
               size={24}
               color="white"
               weight="bold"
             />
-            <span className={styles.topicName}>Sport</span>
+            <span className={styles.topicName}>Edukacja</span>
           </div>
           <div
             className={`${styles.topicContainer} ${styles.desktopContainer}`}
           >
             <CustomIcon
-              name="basketball"
+              name="worldnews"
               size={24}
               color="white"
               weight="bold"
             />
-            <span className={styles.topicName}>Sport</span>
+            <span className={styles.topicName}>Newsy</span>
           </div>
         </div>
       )}

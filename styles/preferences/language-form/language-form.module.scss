@@ -18,7 +18,7 @@
     align-items: center;
 
     @include desktop {
-      width: 80%;
+      width: 90%;
       flex-direction: row;
       justify-content: space-between;
       margin: 8em auto;
@@ -41,8 +41,9 @@
       border-bottom: none;
 
       @include desktop {
-        width: 20em;
+        width: 20%;
         height: 20em;
+        gap: 0;
         border: 2px solid variables.$background-blue;
         border-radius: 12px;
         flex-direction: column;
@@ -63,7 +64,7 @@
         height: 2em;
 
         @include desktop {
-          width: 18em;
+          width: 90%;
           height: 12em;
         }
       }
