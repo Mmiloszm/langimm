@@ -10,16 +10,18 @@
   padding-top: 5.5em;
   @include desktop {
     justify-content: flex-end;
-    gap: 5%;
+    gap: 8%;
+  }
+
+  @include desktop-xl {
+    justify-content: flex-end;
+    gap: 14%;
   }
 
   .heroImage {
     display: none;
     @include desktop {
       display: block;
-      width: 35%;
-      height: 75%;
-      position: relative;
     }
   }
 

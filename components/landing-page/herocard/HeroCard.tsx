@@ -5,10 +5,14 @@ import Image from "next/image";
 const HeroCard = () => {
   return (
     <div className={styles.wrapper}>
-      <div className={styles.heroImage}>
-        <Image fill={true} src={"/ilustracje-03.png"} alt="Girl sitting next to her laptop and learning"/>
+      <Image
+        height={580}
+        width={480}
+        src={"/ilustracje-03.png"}
+        alt="Girl sitting next to her laptop and learning"
+        className={styles.heroImage}
+      />
 
-      </div>
       <div className={styles.card}>
         <div className={styles.titleWrapper}>
           <h1 className={styles.heroTitle}>LangImmersion</h1>
