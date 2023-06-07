@@ -42,8 +42,10 @@
       border-bottom: none;
 
       @include desktop {
-        width: 20em;
+        min-width: 280px;
+        width: 60%;
         height: 20em;
+        gap: 0;
         border: 2px solid variables.$background-blue;
         border-radius: 12px;
         flex-direction: column;

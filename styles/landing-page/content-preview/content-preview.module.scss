@@ -42,23 +42,34 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(3, 1fr);
     margin: 5em auto 0 auto;
-    column-gap: 3.5em;
+    column-gap: 0em;
 
     @include desktop {
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-template-rows: repeat(2, 1fr);
+      column-gap: 3.5em;
     }
 
     .topicContainer {
       display: flex;
       background-color: variables.$elements-secondary-blue;
-      max-width: 140px;
-      padding: 1em 2em;
-      margin: 1em;
+      max-width: 180px;
+      padding: 0.75em 1.5em;
+      margin: 1em 0.5em;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
+
+      @include tablet {
+        gap: 1em;
+        margin: 1em 2em;
+        padding: 1em 2em;
+      }
       @include desktop {
         gap: 1em;
+        max-width: none;
+        justify-content: center;
+        padding: 1em 2em;
+
       }
 
       .topicName {
@@ -75,6 +86,18 @@
   }
 
   .imageWrapper {
+    position:relative;
+    width: 80%;
+    height: 50%;
     margin: 5em auto;
+
+    @include tablet {
+      width: 60%;
+
+    }
+    @include desktop {
+      width: 30em;
+      height: 45%;
+    }
   }
 }

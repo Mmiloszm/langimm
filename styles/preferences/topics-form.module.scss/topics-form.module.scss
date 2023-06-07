@@ -42,7 +42,7 @@
       border-bottom: none;
 
       @include desktop {
-        width: 20em;
+        width: 75%;
         height: 20em;
         border: 2px solid variables.$background-blue;
         border-radius: 12px;

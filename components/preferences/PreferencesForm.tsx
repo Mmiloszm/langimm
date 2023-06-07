@@ -55,7 +55,7 @@ const PreferencesForm = () => {
         );
         const categoriesRaw: LanguagesAndCategoriesRawType[] =
           await getCategories();
-        if (currentlyPreferencesRaw && categoriesRaw) {
+        if (currentlyPreferencesRaw.categories && categoriesRaw) {
           const newCategories = categoriesRaw.map((category) => {
             const isAssigned = currentlyPreferencesRaw.categories.find(
               (pref) => {

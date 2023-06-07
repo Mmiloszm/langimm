@@ -5,6 +5,7 @@ import ContentPreview from "@/components/landing-page/herocard/ContentPreview";
 export default function Home() {
   return (
     <main>
+      <title>LangImmersion | Strona Główna</title>
       <section className={`${styles.container} ${styles.light}`}>
         <HeroCard />
       </section>
@@ -19,7 +20,7 @@ export default function Home() {
           title="Poznawaj nowe słowa."
           subtitle="W trakcie czytania na bieżąco tłumacz nieznane słowa i dodawaj je do bazy testowej."
           image={{
-            url: "https://placehold.co/300x245",
+            url: "/ilustracje-01.png",
             alt: "Zdjęcia procesu translacji",
           }}
         />
@@ -29,7 +30,7 @@ export default function Home() {
           title="Ucz się i zapamiętuj."
           subtitle="Rozwiązuj fiszki zawierające dodane wcześniej przez Ciebie słowa."
           image={{
-            url: "https://placehold.co/300x245",
+            url: "/ilustracje-02.png",
             alt: "Zdjęcia procesu nauki",
           }}
         />
