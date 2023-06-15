@@ -160,3 +160,4 @@ const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
 };
 
 export default AuthForm;
+

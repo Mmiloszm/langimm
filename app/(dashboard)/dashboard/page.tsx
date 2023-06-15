@@ -1,3 +1,4 @@
+
 import Dashboard from "@/components/dashboard/Dashboard";
 
 function DashboardPage() {
@@ -9,3 +10,4 @@ function DashboardPage() {
   );
 }
 export default DashboardPage;
+
