@@ -110,14 +110,17 @@ const Dashboard = () => {
         if (selectedLanguage) {
           const languageQuery = selectedLanguage.id;
           const categoriesQuery = selectedCategories.join(",");
+          const token = localStorage.getItem("access");
 
-          const newParams: ArticlesQueryParamsType = {
-            languageId: languageQuery,
-            limit: 12,
-            offset: 0,
-            categoriesId: categoriesQuery ? categoriesQuery : "",
-            sort: sort,
-          };
+          const newParams: ArticlesQueryParamsType & { token: string | null } =
+            {
+              languageId: languageQuery,
+              limit: 12,
+              offset: 0,
+              categoriesId: categoriesQuery ? categoriesQuery : "",
+              sort: sort,
+              token: token,
+            };
           setPage(1);
           setArticlesQueryParams(newParams);
 
@@ -140,9 +143,11 @@ const Dashboard = () => {
   const fetchMoreArticles = async () => {
     setAreArticlesLoading(true);
     const newOffset = offset + 12;
+    const token = localStorage.getItem("access");
     const newArticles: ArticleType[] = await getArticles({
       ...articlesQueryParams,
       offset: newOffset,
+      token: token,
     });
     setOffset(newOffset);
     if (newArticles.length < 12) {

@@ -110,11 +110,12 @@ export const getArticles = async ({
   sort = "nearest_difficulty",
   limit,
   offset,
-}: ArticlesQueryParamsType) => {
+  token,
+}: ArticlesQueryParamsType & { token: string | null }) => {
   return fetcher({
     url: `/api/articles?language_id=${languageId}&${
       categoriesId ? `categories_id=${categoriesId}&` : ""
-    }sort=${sort}&limit=${limit}&offset=${offset}`,
+    }sort=${sort}&limit=${limit}&offset=${offset}&token=${token}`,
     method: "GET",
     body: {},
     json: true,

@@ -8,7 +8,8 @@ export default async function articles(
     ? process.env.NEXT_PUBLIC_BACKEND_URL
     : "http://localhost:8000";
   if (req.method === "GET") {
-    const { language_id, categories_id, sort, offset, limit } = req.query;
+    const { language_id, categories_id, sort, offset, limit, token } =
+      req.query;
     try {
       const articles = await fetch(
         `${url}/articles?language_id=${language_id}&${
@@ -16,7 +17,11 @@ export default async function articles(
         }&sort=${sort}&offset=${offset}&limit=${limit}`,
         {
           method: req.method,
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            // prettier-ignore
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         }
       );
       const articlesData = await articles.json();
