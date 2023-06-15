@@ -1,38 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# LangImmersion
 
-## Getting Started
+## Installation
 
-First, run the development server:
+1. Clone the repo
+2. If you don't have Node installed yet, install it using, for example, this: [Node Version Manager](https://github.com/nvm-sh/nvm). The application was tested using version v16.20.0.
+3. Inside project's directory install packages with:
+
+```bash
+npm install
+```
+
+### Development server
+
+1. To run development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+1. To generate an optimized version of your application for production run:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Start Node.js server with:
 
-## Learn More
+```bash
+npm run start
+```
 
-To learn more about Next.js, take a look at the following resources:
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Presentation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Install and configure backend [LangImmersion](https://git.wmi.amu.edu.pl/s464887/LangImmersion).
+2. First run or everytime you want to clear user data/preferences:
 
-## Deploy on Vercel
+```bash
+[ -f db.sqlite3 ] && rm db.sqlite3; [ -f ./media ] && rm -rf ./media; ./manage.py makemigrations && ./manage.py migrate && ./manage.py loaddata languages categories users && ./manage.py crawl --name=openaccessgovernment
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Start Backend server
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+./manage.py runserver
+```
+
+4. Start Node.js server with:
+
+```bash
+npm run start
+```
+
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. If you have previously logged in and want to demonstrate the login again, clear the browser's localStorage or open an incognito window.
