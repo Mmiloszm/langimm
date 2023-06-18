@@ -3,7 +3,7 @@ import { Difficulty } from "@/types/Difficulties";
 export const initialDifficulties: Difficulty[] = [
   {
     shortcut: "A1",
-    value: 0,
+    value: 0.001,
     name: "nowicjusz",
     active: false,
   },
