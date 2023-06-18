@@ -2,7 +2,8 @@
 import Link from "next/link";
 import styles from "@styles/shared/navbar/navitems.module.scss";
 import PrimaryButton from "../buttons/PrimaryButton";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "@/contexts/UserContext";
 import CustomIcon from "../custom-icon/CustomIcon";
 import {
   Button,
@@ -17,6 +18,7 @@ type NavitemsType = {
 };
 
 const Navitems = ({ version }: NavitemsType) => {
+  const { logout } = useContext(UserContext);
   const [display, setDisplay] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -143,7 +145,10 @@ const Navitems = ({ version }: NavitemsType) => {
                     size="large"
                     sx={{ color: "white" }}
                     variant="text"
-                    onClick={() => resetDisplay()}
+                    onClick={() => {
+                      logout();
+                      resetDisplay();
+                    }}
                     startIcon={
                       <CustomIcon
                         name="signout"
@@ -195,7 +200,10 @@ const Navitems = ({ version }: NavitemsType) => {
                         </ListItemIcon>
                         Ustawienia
                       </MenuItem>
-                      <MenuItem onClick={handleMenuClose}>
+                      <MenuItem onClick={() => {
+                        handleMenuClose();
+                        logout();
+                      }}>
                         <ListItemIcon>
                           {" "}
                           <CustomIcon
