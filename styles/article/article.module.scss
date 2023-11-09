@@ -19,6 +19,11 @@
         font-size: 2rem;
       }
     }
+    .tooltip {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
 
     @include desktop {
       width: 50%;

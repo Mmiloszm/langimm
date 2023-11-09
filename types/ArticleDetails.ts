@@ -1,4 +1,4 @@
-type Paragraph = {
+export type Paragraph = {
   id: number;
   text: string;
 };
