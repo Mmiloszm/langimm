@@ -1,0 +1,28 @@
+.default {
+  display: inline-block;
+  padding: 1px 2.5px;
+  cursor: pointer;
+  transition: background 0.1s ease-in;
+  border-radius: 8px;
+  &:hover {
+    background: #e0effe;
+  }
+}
+
+.selected {
+  animation: pulsate 1.5s infinite;
+}
+
+@keyframes pulsate {
+  0% {
+    background: #acc8e5;
+  }
+
+  50% {
+    background: #57b7f2;
+  }
+
+  100% {
+    background: #acc8e5;
+  }
+}
