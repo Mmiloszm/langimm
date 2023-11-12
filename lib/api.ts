@@ -167,3 +167,29 @@ export const addTextToKnowledgeBase = async (
     json: true,
   });
 };
+
+export const getArticlesFromKnowledgeBase = async (
+  token: string,
+  offset: number,
+  limit: number
+) => {
+  return fetcher({
+    url: `/api/knowledgeBase/articles?offset=${offset}&limit=${limit}&token=${token}`,
+    method: "GET",
+    body: {},
+    json: true,
+  });
+};
+
+export const getTextsFromKnowledgeBase = async (
+  token: string,
+  offset: number,
+  limit: number
+) => {
+  return fetcher({
+    url: `/api/knowledgeBase/texts?offset=${offset}&limit=${limit}&token=${token}`,
+    method: "GET",
+    body: {},
+    json: true,
+  });
+};

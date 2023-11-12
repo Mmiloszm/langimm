@@ -11,6 +11,7 @@ import {
   CaretLeft,
   CaretRight,
   CircleNotch,
+  Database,
   EnvelopeSimple,
   Exam,
   Funnel,
@@ -76,6 +77,7 @@ const IconsList: ListOfIconsProps = {
   user: UserCircle,
   arrowforward: CaretRight,
   arrowback: CaretLeft,
+  database: Database,
 };
 
 const CustomIcon = ({

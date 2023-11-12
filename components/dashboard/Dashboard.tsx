@@ -20,7 +20,7 @@ import ArticleCard from "./card/ArticleCard";
 import BasicLoader from "../shared/loaders/BasicLoader";
 import Filter from "./filters/Filter";
 import Sort from "./filters/Sort";
-import PageNavigation from "./page-navigation/PageNavigation";
+import PageNavigation from "../shared/page-navigation/PageNavigation";
 import { ArticlesQueryParamsType } from "@/types/ArticlesQueryParams";
 import Link from "next/link";
 
@@ -226,9 +226,9 @@ const Dashboard = () => {
                     </section>
                   </div>
                   <PageNavigation
-                    articles={articles}
+                    items={articles}
                     page={page}
-                    fetchMoreArticles={fetchMoreArticles}
+                    fetchMore={fetchMoreArticles}
                     isPossibleToFetchMore={isPossibleToFetchMore}
                     setPage={setPage}
                   />

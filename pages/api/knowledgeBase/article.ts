@@ -27,7 +27,5 @@ export default async function updatePreferences(
     } catch (err) {
       res.status(501).json({ error: "failed to refresh token" });
     }
-  } else {
-    res.status(402);
   }
 }
