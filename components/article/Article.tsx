@@ -283,12 +283,14 @@ const Article = ({ articleId }: { articleId: number }) => {
                 );
               }
             })}
-          <span className={styles.source}>
-            źródło:{" "}
-            <Link className={styles.link} href={article.url}>
-              {article.url}
-            </Link>
-          </span>
+          <div className={styles.sourceWrapper}>
+            <span className={styles.source}>
+              źródło:{" "}
+              <Link className={styles.link} href={article.url}>
+                {article.url}
+              </Link>
+            </span>
+          </div>
         </div>
       ) : (
         <BasicLoader />

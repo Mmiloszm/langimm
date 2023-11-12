@@ -1,0 +1,22 @@
+.container {
+  padding: 10px;
+  border-radius: 8px;
+  border: 0.6px solid #d9cfcf;
+  max-width: 280px;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  .wordWrapper {
+    text-align: center;
+    text-transform: lowercase;
+  }
+  .buttonWrapper {
+    display: flex;
+    justify-content: center;
+  }
+  .actionsWrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

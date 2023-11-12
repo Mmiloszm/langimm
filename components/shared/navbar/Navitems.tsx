@@ -66,7 +66,7 @@ const Navitems = ({ version }: NavitemsType) => {
             {version === "default" && (
               <div className={styles.itemsWrapper}>
                 <li className={styles.item}>
-                  <Link href={"/signin"} onClick={() => resetDisplay}>
+                  <Link href={"/signin"} onClick={() => resetDisplay()}>
                     <PrimaryButton variants={["navButton", "transparent"]}>
                       zaloguj się
                     </PrimaryButton>
@@ -99,6 +99,27 @@ const Navitems = ({ version }: NavitemsType) => {
                   >
                     podejmij quiz
                   </Button>
+                </li>
+                <li className={styles.item}>
+                  <Link href="/knowledge-base" passHref>
+                    <Button
+                      size="large"
+                      sx={{ color: "white" }}
+                      variant="text"
+                      onClick={() => resetDisplay()}
+                      startIcon={
+                        <CustomIcon
+                          name="database"
+                          weight="regular"
+                          color="white"
+                          size={32}
+                          alt="baza wiedzy"
+                        />
+                      }
+                    >
+                      baza wiedzy
+                    </Button>
+                  </Link>
                 </li>
                 <li className={styles.item}>
                   <Link href="/preferences" passHref>
@@ -200,10 +221,12 @@ const Navitems = ({ version }: NavitemsType) => {
                         </ListItemIcon>
                         Ustawienia
                       </MenuItem>
-                      <MenuItem onClick={() => {
-                        handleMenuClose();
-                        logout();
-                      }}>
+                      <MenuItem
+                        onClick={() => {
+                          handleMenuClose();
+                          logout();
+                        }}
+                      >
                         <ListItemIcon>
                           {" "}
                           <CustomIcon

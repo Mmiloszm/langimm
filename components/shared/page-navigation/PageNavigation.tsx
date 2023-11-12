@@ -1,28 +1,30 @@
 import CustomIcon from "@/components/shared/custom-icon/CustomIcon";
-import { ArticleType } from "@/types/Article";
+import { useWindowDimensions } from "@/hooks/useWindowDimensions";
+
 import { Button } from "@mui/material";
-import styles from "@styles/dashboard/page-navigation/page-navigation.module.scss";
+import styles from "@styles/shared/page-navigation/page-navigation.module.scss";
 import { Dispatch, SetStateAction, useState, useEffect } from "react";
 
 type PageNavigationPropsType = {
-  articles: ArticleType[];
+  items: any[];
   page: number;
-  fetchMoreArticles: () => Promise<void>;
+  fetchMore: () => Promise<void>;
   isPossibleToFetchMore: boolean;
   setPage: Dispatch<SetStateAction<number>>;
 };
 
 const PageNavigation = ({
-  articles,
+  items,
   page,
   setPage,
-  fetchMoreArticles,
+  fetchMore,
   isPossibleToFetchMore,
 }: PageNavigationPropsType) => {
+  const { width } = useWindowDimensions();
   const handleClick = ({ action }: { action: "back" | "forward" }) => {
     if (action === "forward") {
-      if (articles.length >= page * 12) {
-        fetchMoreArticles();
+      if (items.length >= page * 12) {
+        fetchMore();
       }
       setPage((page) => page + 1);
     } else {
@@ -32,7 +34,7 @@ const PageNavigation = ({
 
   const checkIfCanGoForward = () => {
     if (!isPossibleToFetchMore) {
-      if (page < Math.ceil(articles.length / 12)) {
+      if (page < Math.ceil(items.length / 12)) {
         return false;
       }
       return true;
@@ -46,7 +48,7 @@ const PageNavigation = ({
         variant="contained"
         color="primary"
         onClick={() => handleClick({ action: "back" })}
-        size="large"
+        size={width < 600 ? "small" : "large"}
         disabled={page < 2}
         startIcon={
           <CustomIcon
@@ -64,7 +66,7 @@ const PageNavigation = ({
         variant="contained"
         color="primary"
         onClick={() => handleClick({ action: "forward" })}
-        size="large"
+        size={width < 600 ? "small" : "large"}
         disabled={checkIfCanGoForward()}
         endIcon={
           <CustomIcon
