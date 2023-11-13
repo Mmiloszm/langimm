@@ -20,7 +20,7 @@ import ArticleCard from "./card/ArticleCard";
 import BasicLoader from "../shared/loaders/BasicLoader";
 import Filter from "./filters/Filter";
 import Sort from "./filters/Sort";
-import PageNavigation from "./page-navigation/PageNavigation";
+import PageNavigation from "../shared/page-navigation/PageNavigation";
 import { ArticlesQueryParamsType } from "@/types/ArticlesQueryParams";
 import Link from "next/link";
 
@@ -30,7 +30,7 @@ type PreferencesRawType = {
 };
 
 const Dashboard = () => {
-  const { isAuthenticated } = useContext(UserContext);
+  const { isAuthenticated, logout } = useContext(UserContext);
   const [sort, setSort] = useState<"nearest_difficulty" | "newest">(
     "nearest_difficulty"
   );
@@ -63,12 +63,17 @@ const Dashboard = () => {
           await getCategories();
         if (preferencesRaw && categoriesRaw) {
           const newCategories = categoriesRaw.map((category) => {
-            const foundCategory = preferencesRaw.categories.find((item) => {
-              return item.id === category.id;
-            });
-            if (foundCategory) {
-              return { ...category, active: true };
+            try {
+              const foundCategory = preferencesRaw.categories.find((item) => {
+                return item.id === category.id;
+              });
+              if (foundCategory) {
+                return { ...category, active: true };
+              }
+            } catch (e) {
+              logout();
             }
+
             return { ...category, active: false };
           });
           const newLanguages = preferencesRaw.languages.map(
@@ -91,8 +96,10 @@ const Dashboard = () => {
 
     if (isAuthenticated) {
       fetchPreferences();
+    } else {
+      logout();
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, logout]);
 
   useEffect(() => {
     const fetchArticles = async () => {
@@ -219,9 +226,9 @@ const Dashboard = () => {
                     </section>
                   </div>
                   <PageNavigation
-                    articles={articles}
+                    items={articles}
                     page={page}
-                    fetchMoreArticles={fetchMoreArticles}
+                    fetchMore={fetchMoreArticles}
                     isPossibleToFetchMore={isPossibleToFetchMore}
                     setPage={setPage}
                   />

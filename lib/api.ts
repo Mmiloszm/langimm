@@ -142,3 +142,54 @@ export const updatePreferences = async (
     json: true,
   });
 };
+
+export const addArticleToKnowledgeBase = async (
+  token: string,
+  articleId: number
+) => {
+  return fetcher({
+    url: `/api/knowledgeBase/article?articleId=${articleId}&token=${token}`,
+    method: "POST",
+    body: {},
+    json: false,
+  });
+};
+
+export const addTextToKnowledgeBase = async (
+  token: string,
+  articleId: number,
+  text: string
+) => {
+  return fetcher({
+    url: `/api/knowledgeBase/text?articleId=${articleId}&text=${text}&token=${token}`,
+    method: "POST",
+    body: {},
+    json: true,
+  });
+};
+
+export const getArticlesFromKnowledgeBase = async (
+  token: string,
+  offset: number,
+  limit: number
+) => {
+  return fetcher({
+    url: `/api/knowledgeBase/articles?offset=${offset}&limit=${limit}&token=${token}`,
+    method: "GET",
+    body: {},
+    json: true,
+  });
+};
+
+export const getTextsFromKnowledgeBase = async (
+  token: string,
+  offset: number,
+  limit: number
+) => {
+  return fetcher({
+    url: `/api/knowledgeBase/texts?offset=${offset}&limit=${limit}&token=${token}`,
+    method: "GET",
+    body: {},
+    json: true,
+  });
+};

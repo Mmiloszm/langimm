@@ -1,0 +1,34 @@
+@use "@/styles/mixins" as *;
+.wrapper {
+  padding: 2.5em 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 0 auto;
+  background: #f7f8fa;
+  width: 90%;
+  border-radius: 8px;
+  gap: 25px;
+
+  @include desktop-xl {
+    width: 100%;
+    padding: 2.5em;
+    display: grid;
+    grid-template-columns: repeat(4, 300px);
+    grid-template-rows: repeat(3, 1fr);
+  }
+  @include between-desktop {
+    width: 100%;
+    padding: 2.5em;
+    display: grid;
+    grid-template-columns: repeat(4, 300px);
+    grid-template-rows: repeat(3, 1fr);
+  }
+}
+
+.navigationWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}

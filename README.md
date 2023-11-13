@@ -3,7 +3,7 @@
 ## Installation
 
 1. Clone the repo
-2. If you don't have Node installed yet, install it using, for example, this: [Node Version Manager](https://github.com/nvm-sh/nvm). The application was tested using version v16.20.0.
+2. If you don't have Node installed yet, install it using, for example, this: [Node Version Manager](https://github.com/nvm-sh/nvm). The application was tested using version v18.18.2.
 3. Inside project's directory install packages with:
 
 ```bash
