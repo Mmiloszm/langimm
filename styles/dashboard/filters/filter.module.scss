@@ -112,6 +112,7 @@
 
             @include desktop {
               color: variables.$elements-blue;
+              margin-right: 1em;
             }
 
             .buttonText {

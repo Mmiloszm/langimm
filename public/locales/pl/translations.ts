@@ -24,6 +24,6 @@ export const categoryTranslations: categoryAndLanguageTranslationType = {
 export const languagesTranslations: categoryAndLanguageTranslationType = {
   1: "angielski",
   2: "niemiecki",
-  3: "francuski",
+  3: "włoski",
   4: "hiszpański",
 };

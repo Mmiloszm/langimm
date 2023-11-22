@@ -7,14 +7,17 @@ const SavedArticles = () => {
   const [offset, setOffset] = useState(0);
   const [isPossibleToFetchMore, setIsPossibleToFetchMore] = useState(true);
   const [page, setPage] = useState(1);
-  const [articles, setArticles] = useState<ArticleType[]>();
+  const [articles, setArticles] = useState();
 
   useEffect(() => {
     const fetchArticles = async () => {
       const token = localStorage.getItem("access");
       if (token) {
-        const initialArticles: ArticleType[] =
-          await getArticlesFromKnowledgeBase(token, offset, 12);
+        const initialArticles = await getArticlesFromKnowledgeBase(
+          token,
+          offset,
+          12
+        );
 
         if (initialArticles) {
           setArticles(initialArticles);
@@ -28,6 +31,10 @@ const SavedArticles = () => {
     };
     fetchArticles();
   }, []);
-  return <section>artykuly</section>;
+  return (
+    <section>
+      <button onClick={() => console.log(articles)}></button>Klik
+    </section>
+  );
 };
 export default SavedArticles;

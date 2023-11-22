@@ -69,7 +69,7 @@ const SavedWords = () => {
   return (
     <section>
       {" "}
-      {!isEmpty && !areWordsLoading ? (
+      {isEmpty && !areWordsLoading ? (
         <>
           <div style={{ overflow: "hidden" }}>
             <section className={styles.wrapper}>
@@ -89,13 +89,24 @@ const SavedWords = () => {
           </div>
         </>
       ) : (
-        <div className={styles.wrapper}>
-          {isEmpty ? (
-            <span>Dodaj słowa do bazy wiedzy, by się tu pojawiły</span>
+        <div className={styles.emptyWrapper}>
+          {!isEmpty ? (
+            <div className={styles.instructionWrapper}>
+              <span>Dodaj słowa do bazy wiedzy, by się tu pojawiły.</span>
+              <h3 className={styles.headliner}>Instrukcja:</h3>
+              <span>
+                1. Wybierz słowo początkowe i końcowe, fraza pomiędzy nimi
+                będzie przetłumaczona.
+              </span>
+              <span>2. Maksymalna długość frazy to 5 słów.</span>
+              <span>
+                3. Frazy mogą być tylko w obrębie tego samego paragrafu.
+              </span>
+            </div>
           ) : (
-            <>
+            <div className={styles.loaderWrapper}>
               <BasicLoader />
-            </>
+            </div>
           )}
         </div>
       )}

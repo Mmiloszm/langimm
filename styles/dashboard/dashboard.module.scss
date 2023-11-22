@@ -10,7 +10,7 @@
   align-items: center;
 
   .filtersWrapper {
-    width: 80%;
+    width: 85%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,7 +59,10 @@
       width: 100%;
     }
 
-    @include desktop {
+    @include desktop-xl {
+      width: 80%;
+    }
+    @include between-desktop {
       width: 80%;
     }
   }

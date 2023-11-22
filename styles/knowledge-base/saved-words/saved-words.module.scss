@@ -21,8 +21,27 @@
     width: 100%;
     padding: 2.5em;
     display: grid;
-    grid-template-columns: repeat(4, 300px);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 300px);
+    grid-template-rows: repeat(4, 1fr);
+  }
+}
+
+.emptyWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 2em;
+  .instructionWrapper {
+    .headliner {
+      padding-top: 1em;
+    }
+    display: flex;
+    flex-direction: column;
+  }
+  .loaderWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 }
 
