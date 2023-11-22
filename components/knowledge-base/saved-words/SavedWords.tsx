@@ -69,7 +69,7 @@ const SavedWords = () => {
   return (
     <section>
       {" "}
-      {isEmpty && !areWordsLoading ? (
+      {!isEmpty && !areWordsLoading ? (
         <>
           <div style={{ overflow: "hidden" }}>
             <section className={styles.wrapper}>
@@ -90,7 +90,7 @@ const SavedWords = () => {
         </>
       ) : (
         <div className={styles.emptyWrapper}>
-          {!isEmpty ? (
+          {isEmpty ? (
             <div className={styles.instructionWrapper}>
               <span>Dodaj słowa do bazy wiedzy, by się tu pojawiły.</span>
               <h3 className={styles.headliner}>Instrukcja:</h3>

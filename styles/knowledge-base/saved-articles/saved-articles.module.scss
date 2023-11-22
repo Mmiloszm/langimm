@@ -1,0 +1,47 @@
+@use "@/styles/mixins" as *;
+
+.wrapper {
+  width: 100%;
+  padding-top: 5em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 0 auto;
+
+  .infiniteScroll {
+    width: 100%;
+  }
+
+  @include desktop-xl {
+    width: 80%;
+  }
+  @include between-desktop {
+    width: 80%;
+  }
+}
+
+.emptyWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 2em;
+  .instructionWrapper {
+    .headliner {
+      padding-top: 1em;
+    }
+    display: flex;
+    flex-direction: column;
+  }
+  .loaderWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.navigationWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
