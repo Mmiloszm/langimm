@@ -23,7 +23,7 @@ const showTranslationModal = (
       .then(async (result) => {
         if (result.isConfirmed && token) {
           const res = await addTextToKnowledgeBase(token, articleId, phrase);
-          console.log(res);
+
           if (
             res.success === "Text added to knowledge base, datetime updated" ||
             res.success ===

@@ -109,8 +109,7 @@ const SavedArticles = () => {
               <span>Tu pojawią się artykuły dodane do twojej bazy wiedzy.</span>
 
               <span>
-                Artykuły dodają się autamatycznie, gdy spędzasz nad czytaniem
-                ich więcej niż 10 sekund.
+                Artykuły dodają się automatycznie w trakcie ich czytania.
               </span>
             </div>
           ) : (
