@@ -56,9 +56,13 @@ const KnowledgeBase = () => {
                 </div>
                 <div className={styles.container}>
                   {selectedTab === "articles" ? (
-                    <SavedArticles />
+                    <div className={styles.savedArticles}>
+                      <SavedArticles />
+                    </div>
                   ) : (
-                    <SavedWords />
+                    <div className={styles.savedWords}>
+                      <SavedWords />
+                    </div>
                   )}
                 </div>
               </div>

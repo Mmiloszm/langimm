@@ -1,4 +1,6 @@
 import { ArticlesQueryParamsType } from "@/types/ArticlesQueryParams";
+import { RegistrationUserProps } from "@/types/Auth";
+import { UserProps } from "@/types/Auth";
 import { PreferencesType } from "@/types/Preferences";
 
 type FetcherProps = {
@@ -6,11 +8,6 @@ type FetcherProps = {
   method: "POST" | "GET";
   body: object;
   json: boolean;
-};
-
-type UserProps = {
-  username: string;
-  password: string;
 };
 
 const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
@@ -50,18 +47,18 @@ const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
   }
 };
 
-export const register = async (user: UserProps) => {
+export const register = async (user: RegistrationUserProps) => {
   return fetcher({
-    url: "/api/register",
+    url: "/api/user/register",
     method: "POST",
     body: user,
-    json: false,
+    json: true,
   });
 };
 
 export const signin = async (user: UserProps) => {
   return fetcher({
-    url: "/api/signin",
+    url: "/api/user/signin",
     method: "POST",
     body: user,
     json: true,
@@ -70,7 +67,7 @@ export const signin = async (user: UserProps) => {
 
 export const refreshToken = async (refresh: string) => {
   return fetcher({
-    url: "/api/refreshToken",
+    url: "/api/user/refreshToken",
     method: "POST",
     body: { refresh },
     json: true,

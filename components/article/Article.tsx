@@ -165,6 +165,7 @@ const Article = ({ articleId }: { articleId: number }) => {
           id={index}
           setParams={setSelectedTextParams}
           currentText={currentText}
+          reset={resetText}
         />
       );
     });

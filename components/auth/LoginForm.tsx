@@ -10,14 +10,7 @@ import { UserContext } from "@/contexts/UserContext";
 import { LoadingButton } from "@mui/lab";
 import BasicLoader from "../shared/loaders/BasicLoader";
 import { useRouter } from "next/navigation";
-
-const registerContent = {
-  url: "/register",
-  header: "Stwórz konto",
-  secondaryButton: "Logowanie",
-  primaryButton: "Stwórz konto",
-  hint: "",
-};
+import Link from "next/link";
 
 const loginContent = {
   url: "/signin",
@@ -29,7 +22,7 @@ const loginContent = {
 
 const initial = { username: "", password: "" };
 
-const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
+const LoginForm = () => {
   const { login, isAuthenticated } = useContext(UserContext);
   const [formState, setFormState] = useState({ ...initial });
   const [loading, setLoading] = useState(false);
@@ -41,33 +34,28 @@ const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
       setLoading(true);
 
       try {
-        if (mode === "register") {
-          await register(formState);
-          //handle register
+        const loginBody = {
+          username: formState.username,
+          password: formState.password,
+        };
+        const info = await signin(loginBody);
+        if (info.refresh && info.access) {
+          login({ refresh: info.refresh, access: info.access });
+          router.replace("/dashboard");
         } else {
-          const info = await signin(formState);
-          if (info.refresh && info.access) {
-            login({ refresh: info.refresh, access: info.access });
-            router.replace("/dashboard");
-          } else {
-            setError("Nie udało się poprawnie zalogować.");
-          }
+          setError("Nie udało się poprawnie zalogować.");
         }
       } catch (e) {
-        setError(
-          `Nie udało się poprawnie ${
-            mode === "register" ? "zarejestrować" : "zalogować"
-          }.`
-        );
+        setError("Nie udało się poprawnie zalogować");
       } finally {
         setFormState({ ...initial });
         setLoading(false);
       }
     },
-    [formState, login, mode, router]
+    [formState, login, router]
   );
 
-  const content = mode === "register" ? registerContent : loginContent;
+  const content = loginContent;
 
   return (
     <>
@@ -140,7 +128,9 @@ const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
                 )}
 
                 <div className={styles.formButtons}>
-                  <Button>{content.secondaryButton}</Button>
+                  <Link href="/register">
+                    <Button>{content.secondaryButton}</Button>
+                  </Link>
 
                   <LoadingButton
                     type="submit"
@@ -159,5 +149,4 @@ const AuthForm = ({ mode }: { mode: "signin" | "register" }) => {
   );
 };
 
-export default AuthForm;
-
+export default LoginForm;

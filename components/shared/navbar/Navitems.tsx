@@ -73,9 +73,11 @@ const Navitems = ({ version }: NavitemsType) => {
                   </Link>
                 </li>
                 <li className={styles.item}>
-                  <PrimaryButton variants={["navButton", "navRegister"]}>
-                    zarejestruj się
-                  </PrimaryButton>
+                  <Link href={"/register"} onClick={() => resetDisplay()}>
+                    <PrimaryButton variants={["navButton", "navRegister"]}>
+                      zarejestruj się
+                    </PrimaryButton>
+                  </Link>
                 </li>
               </div>
             )}

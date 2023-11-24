@@ -1,10 +1,19 @@
-import { ArticleType } from "@/types/Article";
+import { ArticleType, CategoryType } from "@/types/Article";
 import Image from "next/image";
 import styles from "@styles/dashboard/article-card/article-card.module.scss";
 import CategoryBadge from "./CategoryBadge";
 import CustomIcon from "@/components/shared/custom-icon/CustomIcon";
 import { colors } from "@/lib/badge-colors";
 import Link from "next/link";
+
+type ArticleCardPropsType = {
+  id: number;
+  title: string;
+  excerpt: string;
+  thumbnail: string | null;
+  category?: CategoryType;
+  difficulty?: number;
+};
 
 const ArticleCard = ({
   id,
@@ -13,7 +22,7 @@ const ArticleCard = ({
   thumbnail,
   category,
   difficulty,
-}: ArticleType) => {
+}: ArticleCardPropsType) => {
   const url = process.env.NEXT_PUBLIC_BACKEND_URL
     ? process.env.NEXT_PUBLIC_BACKEND_URL
     : "http://localhost:8000";
@@ -44,7 +53,9 @@ const ArticleCard = ({
     <Link href={`/article/${id}`} passHref className={styles.link}>
       <div className={styles.cardWrapper}>
         <div className={styles.imageWrapper}>
-          <CategoryBadge name={category.name} difficulty={difficulty} />
+          {difficulty && category && (
+            <CategoryBadge name={category.name} difficulty={difficulty} />
+          )}
           {thumbnail ? (
             <Image
               alt="article thumbnail"
@@ -58,7 +69,7 @@ const ArticleCard = ({
                 size={220}
                 color="#194E7C"
                 weight="bold"
-                alt={category.name}
+                alt="default thumbnail"
               />
             </div>
           )}
