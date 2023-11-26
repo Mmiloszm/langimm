@@ -23,13 +23,17 @@ const showTranslationModal = (
       .then(async (result) => {
         if (result.isConfirmed && token) {
           const res = await addTextToKnowledgeBase(token, articleId, phrase);
-          console.log(res);
-          if (res.success === "Text added to knowledge base") {
+
+          if (
+            res.success === "Text added to knowledge base, datetime updated" ||
+            res.success ===
+              "Text added to knowledge base, article added to visited_articles"
+          ) {
             withReactContent(Swal).fire({
               icon: "success",
               confirmButtonColor: "#0359a4",
               title: "Sukces",
-              position: "bottom-end",
+              position: "center",
               timer: 2000,
             });
           } else {
@@ -37,7 +41,7 @@ const showTranslationModal = (
               icon: "error",
               confirmButtonColor: "#0359a4",
               title: "Ups.. coś poszło nie tak",
-              position: "bottom-end",
+              position: "center",
               timer: 2000,
             });
           }

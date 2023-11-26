@@ -1,5 +1,5 @@
 import CustomIcon from "@/components/shared/custom-icon/CustomIcon";
-import { useWindowDimensions } from "@/hooks/useWindowDimensions";
+import useWindowDimensions from "@/hooks/useWindowDimensions";
 
 import { Button } from "@mui/material";
 import styles from "@styles/shared/page-navigation/page-navigation.module.scss";

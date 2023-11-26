@@ -17,6 +17,7 @@ type WordPropsType = {
     }>
   >;
   currentText: currentTextType;
+  reset: () => void;
 };
 
 const Word = ({
@@ -25,6 +26,7 @@ const Word = ({
   id,
   setParams,
   currentText,
+  reset,
 }: WordPropsType) => {
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -38,7 +40,7 @@ const Word = ({
     withReactContent(Swal).fire({
       confirmButtonColor: "#0359a4",
       title: message,
-      position: "bottom-end",
+      position: "center",
       timer: 3000,
       icon: "error",
     });
@@ -52,10 +54,12 @@ const Word = ({
     ) {
       if (currentText.startWord.paragraphIndex !== paragraphId) {
         showSwal("Frazy mogą znajdować się tylko w obrębie jednego paragrafu.");
+        reset();
         return;
       }
       if (Math.abs(currentText.startWord.wordIndex - id) > 4) {
         showSwal("Maksymalna długość frazy to 5!");
+        reset();
         return;
       }
     }
