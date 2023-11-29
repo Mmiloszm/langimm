@@ -13,6 +13,10 @@ export default async function categories(
         method: req.method,
         headers: { "Content-Type": "application/json" },
       });
+      if (categories.status === 403) {
+        res.status(403).json({ error: "too many requests" });
+        return;
+      }
       const categoriesData = await categories.json();
       res.status(201).json(categoriesData);
     } catch (err) {

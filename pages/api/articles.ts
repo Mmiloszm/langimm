@@ -24,6 +24,10 @@ export default async function articles(
           },
         }
       );
+      if (articles.status === 403) {
+        res.status(403).json({ error: "too many requests" });
+        return;
+      }
       const articlesData = await articles.json();
       res.status(201).json(articlesData);
     } catch (err) {

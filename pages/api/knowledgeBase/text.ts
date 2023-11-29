@@ -22,6 +22,10 @@ export default async function updatePreferences(
           body: JSON.stringify(req.body),
         }
       );
+      if (response.status === 403) {
+        res.status(403).json({ error: "too many requests" });
+        return;
+      }
       const userData = await response.json();
       res.status(201).json(userData);
     } catch (err) {

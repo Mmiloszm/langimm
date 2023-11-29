@@ -2,6 +2,7 @@
 "use client";
 import {
   AirplaneTilt,
+  AppWindow,
   Baby,
   Bank,
   Basketball,
@@ -78,6 +79,7 @@ const IconsList: ListOfIconsProps = {
   arrowforward: CaretRight,
   arrowback: CaretLeft,
   database: Database,
+  appwindow: AppWindow,
 };
 
 const CustomIcon = ({

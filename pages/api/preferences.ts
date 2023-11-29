@@ -17,6 +17,10 @@ export default async function preferences(
           "Authorization": `Bearer ${token}`,
         },
       });
+      if (preferences.status === 403) {
+        res.status(403).json({ error: "too many requests" });
+        return;
+      }
       const preferencesData = await preferences.json();
       res.status(201).json(preferencesData);
     } catch (err) {

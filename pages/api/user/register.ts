@@ -14,6 +14,11 @@ export default async function registration(
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(req.body),
       });
+
+      if (user.status === 403) {
+        res.status(403).json({ error: "too many requests" });
+        return;
+      }
       const result = await user.json();
       res.status(201).json(result);
     } catch (err) {

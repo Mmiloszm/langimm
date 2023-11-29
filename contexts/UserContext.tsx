@@ -27,6 +27,7 @@ export const UserContextProvider = ({
     const refreshUserToken = async () => {
       const access = localStorage.getItem("access");
       const refresh = localStorage.getItem("refresh");
+
       if (access && refresh) {
         const response = await refreshToken(refresh);
         if (response.access) {

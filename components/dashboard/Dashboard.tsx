@@ -94,11 +94,7 @@ const Dashboard = () => {
       }
     };
 
-    if (isAuthenticated) {
-      fetchPreferences();
-    } else {
-      logout();
-    }
+    fetchPreferences();
   }, [isAuthenticated, logout]);
 
   useEffect(() => {
