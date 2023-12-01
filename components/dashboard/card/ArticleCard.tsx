@@ -26,9 +26,9 @@ const ArticleCard = ({
   const url = process.env.NEXT_PUBLIC_BACKEND_URL
     ? process.env.NEXT_PUBLIC_BACKEND_URL
     : "http://localhost:8000";
-  const truncateExcerpt = (toTruncate: string) => {
-    if (toTruncate.length > 192) {
-      const truncatedString = toTruncate.slice(0, 192).trim();
+  const truncatePhrase = (toTruncate: string, limit: number) => {
+    if (toTruncate.length > limit) {
+      const truncatedString = toTruncate.slice(0, limit).trim();
       const lastWordIndex = truncatedString.lastIndexOf(" ");
       const finalString = truncatedString.slice(0, lastWordIndex) + "...";
       return finalString;
@@ -75,8 +75,8 @@ const ArticleCard = ({
           )}
         </div>
         <div className={styles.contentWrapper}>
-          <h3 className={styles.title}>{title}</h3>
-          <p className={styles.excerpt}>{truncateExcerpt(excerpt)}</p>
+          <h3 className={styles.title}>{truncatePhrase(title, 86)}</h3>
+          <p className={styles.excerpt}>{truncatePhrase(excerpt, 150)}</p>
         </div>
       </div>
     </Link>

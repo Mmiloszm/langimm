@@ -10,11 +10,12 @@ const showTranslationModal = (
   articleId: number,
   token: string | null
 ) => {
+  const formattedPhrase = phrase.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
   if (isAuthenticated) {
     withReactContent(Swal)
       .fire({
         confirmButtonColor: "#0359a4",
-        title: phrase,
+        title: formattedPhrase,
         text: "<tu będzie tłumaczenie>",
         showCancelButton: true,
         confirmButtonText: "Dodaj",
@@ -22,7 +23,11 @@ const showTranslationModal = (
       })
       .then(async (result) => {
         if (result.isConfirmed && token) {
-          const res = await addTextToKnowledgeBase(token, articleId, phrase);
+          const res = await addTextToKnowledgeBase(
+            token,
+            articleId,
+            formattedPhrase
+          );
 
           if (
             res.success === "Text added to knowledge base, datetime updated" ||

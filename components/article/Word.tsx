@@ -92,7 +92,7 @@ const Word = ({
         selectIfPossible();
       }}
     >
-      {text}
+      {text}&nbsp;
     </span>
   );
 };

@@ -7,7 +7,7 @@ import WordCard from "./WordCard";
 
 type savedWordsApiResponseType = {
   success: boolean;
-  texts: { text: string }[];
+  texts: { text: string; translation: string; language_id: number }[];
   total_texts: number;
 };
 

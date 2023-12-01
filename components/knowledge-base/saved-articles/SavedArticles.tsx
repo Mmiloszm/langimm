@@ -11,6 +11,7 @@ type savedArticleType = {
   id: number;
   thumbnail: string | null;
   title: string;
+  language_id: number;
 };
 
 type savedArticlesApiResponseType = {

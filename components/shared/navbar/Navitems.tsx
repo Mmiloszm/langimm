@@ -95,8 +95,8 @@ const Navitems = ({ version }: NavitemsType) => {
                       sx={{ color: "white" }}
                       variant="text"
                       onClick={() => {
-                        resetDisplay();
                         handleDisplay();
+                        resetDisplay();
                       }}
                       startIcon={
                         <CustomIcon
@@ -119,8 +119,8 @@ const Navitems = ({ version }: NavitemsType) => {
                       sx={{ color: "white" }}
                       variant="text"
                       onClick={() => {
-                        resetDisplay();
                         handleDisplay();
+                        resetDisplay();
                       }}
                       startIcon={
                         <CustomIcon
@@ -143,8 +143,8 @@ const Navitems = ({ version }: NavitemsType) => {
                       sx={{ color: "white" }}
                       variant="text"
                       onClick={() => {
-                        resetDisplay();
                         handleDisplay();
+                        resetDisplay();
                       }}
                       startIcon={
                         <CustomIcon
