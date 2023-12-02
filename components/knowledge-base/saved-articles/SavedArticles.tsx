@@ -20,6 +20,14 @@ type savedArticlesApiResponseType = {
   total_articles: number;
 };
 
+type languagesType = { [key: number]: string };
+const languages: languagesType = {
+  1: "ENGLISH",
+  2: "GERMAN",
+  3: "ITALIAN",
+  4: "SPANISH",
+};
+
 const SavedArticles = () => {
   const [areArticlesLoading, setAreArticlesLoading] = useState(true);
   const [offset, setOffset] = useState(0);
@@ -89,6 +97,7 @@ const SavedArticles = () => {
                   excerpt={article.excerpt}
                   title={article.title}
                   thumbnail={article.thumbnail}
+                  languageName={languages[article.language_id]}
                 />
               ))}{" "}
             </section>

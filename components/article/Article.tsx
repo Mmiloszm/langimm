@@ -117,12 +117,14 @@ const Article = ({ articleId }: { articleId: number }) => {
               wordId: selectedTextParams.wordIndex,
             }
           );
+
           showTranslationModal(
             selectedText,
             isAuthenticated,
             router,
             article.id,
-            token
+            token,
+            article.language.name
           );
           resetText();
         }

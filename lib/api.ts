@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 type FetcherProps = {
   url: string;
-  method: "POST" | "GET";
+  method: "POST" | "GET" | "DELETE";
   body: object;
   json: boolean;
 };
@@ -37,6 +37,22 @@ const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
       return data;
     }
   } else if (method === "GET") {
+    const res = await fetch(url, {
+      method,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    if (!res.ok) {
+      console.error("API not responding");
+    }
+
+    if (json) {
+      const data = await res.json();
+      return data;
+    }
+  } else if (method === "DELETE") {
     const res = await fetch(url, {
       method,
       headers: {
@@ -194,6 +210,29 @@ export const getTextsFromKnowledgeBase = async (
   return fetcher({
     url: `/api/knowledgeBase/texts?offset=${offset}&limit=${limit}&token=${token}`,
     method: "GET",
+    body: {},
+    json: true,
+  });
+};
+
+export const translateText = async (
+  token: string | null,
+  language: string,
+  text: string
+) => {
+  const formattedLanguage = language.toLowerCase();
+  return fetcher({
+    url: `/api/knowledgeBase/translateText?text=${text}&language=${formattedLanguage}&token=${token}`,
+    method: "POST",
+    body: {},
+    json: true,
+  });
+};
+
+export const deleteText = async (token: string, id: number) => {
+  return fetcher({
+    url: `/api/knowledgeBase/deleteText?id=${id}&token=${token}`,
+    method: "DELETE",
     body: {},
     json: true,
   });

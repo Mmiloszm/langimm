@@ -9,6 +9,7 @@ export default async function signin(
     : "http://localhost:8000";
   if (req.method === "POST") {
     try {
+      console.log(url);
       const user = await fetch(`${url}/user/token/`, {
         method: req.method,
         headers: { "Content-Type": "application/json" },

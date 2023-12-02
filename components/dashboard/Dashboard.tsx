@@ -1,12 +1,6 @@
 "use client";
 import { UserContext } from "@/contexts/UserContext";
-import {
-  getArticles,
-  getCategories,
-  getLanguages,
-  getPreferences,
-  updatePreferences,
-} from "@/lib/api";
+import { getArticles, getCategories, getPreferences } from "@/lib/api";
 import { ArticleType } from "@/types/Article";
 import {
   LanguagesAndCategoriesRawType,
@@ -23,6 +17,8 @@ import Sort from "./filters/Sort";
 import PageNavigation from "../shared/page-navigation/PageNavigation";
 import { ArticlesQueryParamsType } from "@/types/ArticlesQueryParams";
 import Link from "next/link";
+
+import ArticleCardSkeleton from "./card/ArticleCardSkeleton";
 
 type PreferencesRawType = {
   languages: LanguagesAndCategoriesRawType[] & { experience: number };
@@ -230,7 +226,17 @@ const Dashboard = () => {
                   />
                 </>
               ) : (
-                <>{!isEmpty && <BasicLoader />}</>
+                <>
+                  {!isEmpty && (
+                    <div style={{ overflow: "hidden" }}>
+                      <section className={styles.articlesWrapper}>
+                        {Array.from(Array(9)).map((card, index) => (
+                          <ArticleCardSkeleton key={index} />
+                        ))}
+                      </section>
+                    </div>
+                  )}
+                </>
               )}
             </>
           )}

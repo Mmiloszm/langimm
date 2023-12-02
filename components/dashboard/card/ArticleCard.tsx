@@ -13,6 +13,7 @@ type ArticleCardPropsType = {
   thumbnail: string | null;
   category?: CategoryType;
   difficulty?: number;
+  languageName?: string;
 };
 
 const ArticleCard = ({
@@ -22,6 +23,7 @@ const ArticleCard = ({
   thumbnail,
   category,
   difficulty,
+  languageName,
 }: ArticleCardPropsType) => {
   const url = process.env.NEXT_PUBLIC_BACKEND_URL
     ? process.env.NEXT_PUBLIC_BACKEND_URL
@@ -53,8 +55,15 @@ const ArticleCard = ({
     <Link href={`/article/${id}`} passHref className={styles.link}>
       <div className={styles.cardWrapper}>
         <div className={styles.imageWrapper}>
-          {difficulty && category && (
+          {typeof difficulty !== "undefined" && category && (
             <CategoryBadge name={category.name} difficulty={difficulty} />
+          )}
+          {languageName && (
+            <CategoryBadge
+              name=""
+              difficulty={null}
+              languageName={languageName}
+            />
           )}
           {thumbnail ? (
             <Image

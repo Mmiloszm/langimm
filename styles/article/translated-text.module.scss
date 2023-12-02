@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  .wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    .sourceWrapper {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+
+      .source {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
