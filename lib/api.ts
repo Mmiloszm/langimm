@@ -44,6 +44,13 @@ const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
         "Content-Type": "application/json",
       },
     });
+    if (res.status === 403) {
+      Swal.fire({
+        icon: "warning",
+        title: "Przekroczono limit żądań!",
+        text: "Poczekaj minutę przed kolejnym żądaniem.",
+      });
+    }
     if (!res.ok) {
       console.error("API not responding");
     }
@@ -60,6 +67,13 @@ const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
         "Content-Type": "application/json",
       },
     });
+    if (res.status === 403) {
+      Swal.fire({
+        icon: "warning",
+        title: "Przekroczono limit żądań!",
+        text: "Poczekaj minutę przed kolejnym żądaniem.",
+      });
+    }
     if (!res.ok) {
       console.error("API not responding");
     }

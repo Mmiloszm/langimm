@@ -30,6 +30,7 @@ import {
   Person,
   PersonSimpleRun,
   PhoneCall,
+  Plus,
   Question,
   SignOut,
   Student,
@@ -80,6 +81,7 @@ const IconsList: ListOfIconsProps = {
   arrowback: CaretLeft,
   database: Database,
   appwindow: AppWindow,
+  add: Plus,
 };
 
 const CustomIcon = ({
