@@ -11,12 +11,21 @@ type savedArticleType = {
   id: number;
   thumbnail: string | null;
   title: string;
+  language_id: number;
 };
 
 type savedArticlesApiResponseType = {
   success: boolean;
   articles: savedArticleType[];
   total_articles: number;
+};
+
+type languagesType = { [key: number]: string };
+const languages: languagesType = {
+  1: "ENGLISH",
+  2: "GERMAN",
+  3: "ITALIAN",
+  4: "SPANISH",
 };
 
 const SavedArticles = () => {
@@ -88,6 +97,7 @@ const SavedArticles = () => {
                   excerpt={article.excerpt}
                   title={article.title}
                   thumbnail={article.thumbnail}
+                  languageName={languages[article.language_id]}
                 />
               ))}{" "}
             </section>

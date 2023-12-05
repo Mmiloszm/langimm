@@ -27,13 +27,15 @@ const RegistrationForm = () => {
   const validationSchema = Yup.object({
     email: Yup.string()
       .email("Podaj poprawny e-mail")
-      .required("E-mail jest obowiązkowy"),
+      .required("E-mail jest obowiązkowy")
+      .max(512, "E-mail to maksimum 512 znaków."),
     username: Yup.string()
       .min(3, "Nazwa użytkownika powinna być długości conajmniej 3.")
-      .required("Nazwa użytkownika jest obowiązkowa"),
+      .required("Nazwa użytkownika jest obowiązkowa")
+      .max(512, "Nazwa użytkownika to maksimum 512 znaków"),
     password: Yup.string()
       .min(8, "Hasło to minimum 8 znaków.")
-
+      .max(512, "Hasło to maksimum 512 znaków.")
       .minNumbers(1, "Hasło musi zawierać minimum 1 cyfrę.")
       .minSymbols(1, "Hasło musi zawierać minimum 1 symbol.")
       .required("Hasło jest obowiązkowe."),
@@ -58,6 +60,7 @@ const RegistrationForm = () => {
           username: values.username,
           password: values.password,
         });
+
         if (info.success === true) {
           Swal.fire({
             icon: "success",
@@ -109,6 +112,7 @@ const RegistrationForm = () => {
               <form onSubmit={formik.handleSubmit}>
                 <div className={styles.inputsWrapper}>
                   <TextField
+                    fullWidth
                     value={formik.values.email}
                     id="email"
                     label="Adres e-mail"
@@ -121,6 +125,7 @@ const RegistrationForm = () => {
                   />
 
                   <TextField
+                    fullWidth
                     id="username"
                     label="Nazwa użytkownika"
                     type="text"
@@ -137,6 +142,7 @@ const RegistrationForm = () => {
                   />
 
                   <TextField
+                    fullWidth
                     InputLabelProps={{ required: false }}
                     id="password"
                     label="Wpisz hasło"
@@ -153,6 +159,7 @@ const RegistrationForm = () => {
                   />
 
                   <TextField
+                    fullWidth
                     InputLabelProps={{ required: false }}
                     id="passwordConfirmation"
                     label="Wpisz ponownie hasło"

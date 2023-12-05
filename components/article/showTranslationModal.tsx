@@ -2,27 +2,47 @@ import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { addTextToKnowledgeBase } from "@/lib/api";
+import { translateText } from "@/lib/api";
+import TranslatedText from "./TranslatedText";
 
-const showTranslationModal = (
+export type translationApiResponseType = {
+  success: string | boolean;
+  translation_source: string;
+};
+
+const showTranslationModal = async (
   phrase: string,
   isAuthenticated: boolean | null,
   router: AppRouterInstance,
   articleId: number,
-  token: string | null
+  token: string | null,
+  languageName: string
 ) => {
+  const formattedPhrase = phrase.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+
   if (isAuthenticated) {
     withReactContent(Swal)
       .fire({
         confirmButtonColor: "#0359a4",
-        title: phrase,
-        text: "<tu będzie tłumaczenie>",
+        title: formattedPhrase,
+        html: (
+          <TranslatedText
+            token={token}
+            languageName={languageName}
+            phrase={formattedPhrase}
+          />
+        ),
         showCancelButton: true,
         confirmButtonText: "Dodaj",
         cancelButtonText: "Anuluj",
       })
       .then(async (result) => {
         if (result.isConfirmed && token) {
-          const res = await addTextToKnowledgeBase(token, articleId, phrase);
+          const res = await addTextToKnowledgeBase(
+            token,
+            articleId,
+            formattedPhrase
+          );
 
           if (
             res.success === "Text added to knowledge base, datetime updated" ||

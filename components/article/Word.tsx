@@ -1,4 +1,10 @@
-import { Dispatch, RefObject, SetStateAction, useRef } from "react";
+import {
+  Dispatch,
+  RefObject,
+  SetStateAction,
+  useCallback,
+  useRef,
+} from "react";
 
 import styles from "@/styles/article/word.module.scss";
 import { currentTextType } from "./Article";
@@ -67,17 +73,26 @@ const Word = ({
     setParams({ paragraphIndex: paragraphId, wordIndex: id, ref: ref });
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
+    if (event.key === "Enter") {
+      selectIfPossible();
+    }
+  };
+
   return (
     <span
+      aria-label="Wybieralne słowo"
       tabIndex={0}
       ref={ref}
       key={id}
+      role="button"
+      onKeyDown={handleKeyDown}
       className={styles.default}
       onClick={() => {
         selectIfPossible();
       }}
     >
-      {text}
+      {text}&nbsp;
     </span>
   );
 };
