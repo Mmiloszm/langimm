@@ -1,5 +1,11 @@
 "use client";
-import { Dispatch, SetStateAction, Suspense, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  Suspense,
+  useContext,
+  useState,
+} from "react";
 import CustomIcon from "@/components/shared/custom-icon/CustomIcon";
 import { Button } from "@mui/material";
 import styles from "@styles/dashboard/filters/filter.module.scss";
@@ -9,6 +15,8 @@ import {
   languagesTranslations,
 } from "@/public/locales/pl/translations";
 import FilterSkeleton from "./FilterSkeleton";
+import { DashboardContext } from "@/contexts/DashboardContext";
+import Link from "next/link";
 
 type FilterPropsType = {
   categories: LanguagesAndCategoriesType[] | undefined;
@@ -28,6 +36,7 @@ const Filter = ({
   setLanguages,
 }: FilterPropsType) => {
   const [toggle, setToggle] = useState(false);
+  const { setActiveLanguage } = useContext(DashboardContext);
 
   const handleCategoryUpdate = (current: LanguagesAndCategoriesType) => {
     if (categories) {
@@ -43,8 +52,10 @@ const Filter = ({
 
   const handleLanguageUpdate = (current: LanguagesAndCategoriesType) => {
     if (languages) {
-      const updated = languages.map((language) => {
+      const updated = languages.map((language, index) => {
         if (language.id === current.id) {
+          setActiveLanguage(index);
+
           return { ...language, active: !language.active };
         }
         return { ...language, active: false };
@@ -138,6 +149,26 @@ const Filter = ({
                   })
                 ) : (
                   <>{renderSkeletons(4)}</>
+                )}
+                {languages && languages.length < 4 && (
+                  <Link
+                    href={"/preferences"}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <button
+                      type="button"
+                      className={`${styles.filterButton} ${styles.addMore}`}
+                    >
+                      <span>Dodaj język</span>
+                      <CustomIcon
+                        name="add"
+                        alt="add icon"
+                        size={20}
+                        color="#0583f2"
+                        weight="bold"
+                      />
+                    </button>
+                  </Link>
                 )}
               </ul>
             </div>

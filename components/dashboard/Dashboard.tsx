@@ -1,12 +1,6 @@
 "use client";
 import { UserContext } from "@/contexts/UserContext";
-import {
-  getArticles,
-  getCategories,
-  getLanguages,
-  getPreferences,
-  updatePreferences,
-} from "@/lib/api";
+import { getArticles, getCategories, getPreferences } from "@/lib/api";
 import { ArticleType } from "@/types/Article";
 import {
   LanguagesAndCategoriesRawType,
@@ -24,6 +18,9 @@ import PageNavigation from "../shared/page-navigation/PageNavigation";
 import { ArticlesQueryParamsType } from "@/types/ArticlesQueryParams";
 import Link from "next/link";
 
+import ArticleCardSkeleton from "./card/ArticleCardSkeleton";
+import { DashboardContext } from "@/contexts/DashboardContext";
+
 type PreferencesRawType = {
   languages: LanguagesAndCategoriesRawType[] & { experience: number };
   categories: LanguagesAndCategoriesRawType[];
@@ -31,9 +28,8 @@ type PreferencesRawType = {
 
 const Dashboard = () => {
   const { isAuthenticated, logout } = useContext(UserContext);
-  const [sort, setSort] = useState<"nearest_difficulty" | "newest">(
-    "nearest_difficulty"
-  );
+  const { activeSort, setActiveSort, activeLanguage } =
+    useContext(DashboardContext);
 
   const [articlesQueryParams, setArticlesQueryParams] =
     useState<ArticlesQueryParamsType>({
@@ -78,7 +74,7 @@ const Dashboard = () => {
           });
           const newLanguages = preferencesRaw.languages.map(
             (language, index) => {
-              if (index === 0) {
+              if (index === activeLanguage) {
                 return { ...language, active: true };
               }
               return { ...language, active: false };
@@ -94,11 +90,7 @@ const Dashboard = () => {
       }
     };
 
-    if (isAuthenticated) {
-      fetchPreferences();
-    } else {
-      logout();
-    }
+    fetchPreferences();
   }, [isAuthenticated, logout]);
 
   useEffect(() => {
@@ -125,7 +117,7 @@ const Dashboard = () => {
               limit: 12,
               offset: 0,
               categoriesId: categoriesQuery ? categoriesQuery : "",
-              sort: sort,
+              sort: activeSort,
               token: token,
             };
           setPage(1);
@@ -145,7 +137,7 @@ const Dashboard = () => {
     };
 
     fetchArticles();
-  }, [categories, languages, sort]);
+  }, [categories, languages, activeSort]);
 
   const fetchMoreArticles = async () => {
     setAreArticlesLoading(true);
@@ -167,7 +159,7 @@ const Dashboard = () => {
   };
 
   const handleSortChange = (event: SelectChangeEvent) => {
-    setSort(event.target.value as "nearest_difficulty" | "newest");
+    setActiveSort(event.target.value as "nearest_difficulty" | "newest");
   };
 
   return (
@@ -191,7 +183,10 @@ const Dashboard = () => {
                       languages={languages}
                       setLanguages={setLanguages}
                     />
-                    <Sort sort={sort} handleSortChange={handleSortChange} />
+                    <Sort
+                      sort={activeSort}
+                      handleSortChange={handleSortChange}
+                    />
                   </section>
                 </>
               ) : (
@@ -234,7 +229,17 @@ const Dashboard = () => {
                   />
                 </>
               ) : (
-                <>{!isEmpty && <BasicLoader />}</>
+                <>
+                  {!isEmpty && (
+                    <div style={{ overflow: "hidden" }}>
+                      <section className={styles.articlesWrapper}>
+                        {Array.from(Array(9)).map((card, index) => (
+                          <ArticleCardSkeleton key={index} />
+                        ))}
+                      </section>
+                    </div>
+                  )}
+                </>
               )}
             </>
           )}

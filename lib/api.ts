@@ -2,54 +2,71 @@ import { ArticlesQueryParamsType } from "@/types/ArticlesQueryParams";
 import { RegistrationUserProps } from "@/types/Auth";
 import { UserProps } from "@/types/Auth";
 import { PreferencesType } from "@/types/Preferences";
+import Swal from "sweetalert2";
 
 type FetcherProps = {
   url: string;
-  method: "POST" | "GET";
+  method: "POST" | "GET" | "DELETE";
   body: object;
   json: boolean;
+  token?: string | null;
 };
 
-const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
-  if (method === "POST") {
-    const res = await fetch(url, {
-      method,
-      body: body && JSON.stringify(body),
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-    if (!res.ok) {
-      console.error("API not responding");
-    }
+const baseUrl = process.env.NEXT_PUBLIC_BACKEND_URL
+  ? process.env.NEXT_PUBLIC_BACKEND_URL
+  : "http://localhost:8000";
 
-    if (json) {
-      const data = await res.json();
-      return data;
-    }
-  } else if (method === "GET") {
-    const res = await fetch(url, {
-      method,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-    if (!res.ok) {
-      console.error("API not responding");
-    }
+const fetcher = async ({
+  url,
+  method,
+  json = true,
+  body,
+  token,
+}: FetcherProps) => {
+  const config = {
+    method,
+    ...(method === "POST" && { body: body && JSON.stringify(body) }),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      ...(token && { Authorization: `Bearer ${token}` }),
+    },
+  };
 
-    if (json) {
-      const data = await res.json();
-      return data;
-    }
+  const res = await fetch(`${baseUrl}/${url}`, config);
+
+  if (res.status === 401) {
+    Swal.fire({
+      icon: "error",
+      title: "Nieprawidłowy login lub hasło",
+    });
+    return;
+  }
+
+  if (res.status === 403) {
+    Swal.fire({
+      icon: "warning",
+      title: "Przekroczono limit żądań!",
+      text: "Poczekaj minutę przed kolejnym żądaniem.",
+    });
+    return;
+  }
+  if (!res.ok) {
+    Swal.fire({
+      icon: "error",
+      title: "Strona jest obecnie niedostępna!",
+    });
+    return;
+  }
+  if (json) {
+    const data = await res.json();
+    return data;
   }
 };
 
 export const register = async (user: RegistrationUserProps) => {
   return fetcher({
-    url: "/api/user/register",
+    url: "user/registration/",
     method: "POST",
     body: user,
     json: true,
@@ -58,7 +75,7 @@ export const register = async (user: RegistrationUserProps) => {
 
 export const signin = async (user: UserProps) => {
   return fetcher({
-    url: "/api/user/signin",
+    url: `user/token/`,
     method: "POST",
     body: user,
     json: true,
@@ -67,7 +84,7 @@ export const signin = async (user: UserProps) => {
 
 export const refreshToken = async (refresh: string) => {
   return fetcher({
-    url: "/api/user/refreshToken",
+    url: "user/token/refresh/",
     method: "POST",
     body: { refresh },
     json: true,
@@ -76,7 +93,7 @@ export const refreshToken = async (refresh: string) => {
 
 export const getCategories = async () => {
   return fetcher({
-    url: "/api/categories",
+    url: "categories/",
     method: "GET",
     body: {},
     json: true,
@@ -85,7 +102,7 @@ export const getCategories = async () => {
 
 export const getLanguages = async () => {
   return fetcher({
-    url: "/api/languages",
+    url: "languages/",
     method: "GET",
     body: {},
     json: true,
@@ -94,7 +111,7 @@ export const getLanguages = async () => {
 
 export const getArticleDetails = async (articleId: number) => {
   return fetcher({
-    url: `/api/articles/${articleId}`,
+    url: `articles/${articleId}`,
     method: "GET",
     body: {},
     json: true,
@@ -110,21 +127,23 @@ export const getArticles = async ({
   token,
 }: ArticlesQueryParamsType & { token: string | null }) => {
   return fetcher({
-    url: `/api/articles?language_id=${languageId}&${
+    url: `articles?language_id=${languageId}&${
       categoriesId ? `categories_id=${categoriesId}&` : ""
-    }sort=${sort}&limit=${limit}&offset=${offset}&token=${token}`,
+    }sort=${sort}&limit=${limit}&offset=${offset}`,
     method: "GET",
     body: {},
     json: true,
+    token: token,
   });
 };
 
 export const getPreferences = async (token: string) => {
   return fetcher({
-    url: `/api/preferences?token=${token}`,
+    url: `user/preferences/`,
     method: "GET",
     body: {},
     json: true,
+    token: token,
   });
 };
 
@@ -133,10 +152,11 @@ export const updatePreferences = async (
   preferencesBody: PreferencesType
 ) => {
   return fetcher({
-    url: `/api/updatePreferences?token=${token}`,
+    url: `user/preferences/`,
     method: "POST",
     body: preferencesBody,
     json: true,
+    token: token,
   });
 };
 
@@ -145,10 +165,11 @@ export const addArticleToKnowledgeBase = async (
   articleId: number
 ) => {
   return fetcher({
-    url: `/api/knowledgeBase/article?articleId=${articleId}&token=${token}`,
+    url: `/user/knowledge_base/article?article_id=${articleId}`,
     method: "POST",
     body: {},
     json: false,
+    token: token,
   });
 };
 
@@ -158,10 +179,11 @@ export const addTextToKnowledgeBase = async (
   text: string
 ) => {
   return fetcher({
-    url: `/api/knowledgeBase/text?articleId=${articleId}&text=${text}&token=${token}`,
+    url: `/user/knowledge_base/text?article_id=${articleId}&text=${text}`,
     method: "POST",
     body: {},
     json: true,
+    token: token,
   });
 };
 
@@ -171,10 +193,11 @@ export const getArticlesFromKnowledgeBase = async (
   limit: number
 ) => {
   return fetcher({
-    url: `/api/knowledgeBase/articles?offset=${offset}&limit=${limit}&token=${token}`,
+    url: `/user/knowledge_base/article?limit=${limit}&offset=${offset}`,
     method: "GET",
     body: {},
     json: true,
+    token: token,
   });
 };
 
@@ -184,9 +207,35 @@ export const getTextsFromKnowledgeBase = async (
   limit: number
 ) => {
   return fetcher({
-    url: `/api/knowledgeBase/texts?offset=${offset}&limit=${limit}&token=${token}`,
+    url: `/user/knowledge_base/texts?limit=${limit}&offset=${offset}`,
     method: "GET",
     body: {},
     json: true,
+    token: token,
+  });
+};
+
+export const translateText = async (
+  token: string | null,
+  language: string,
+  text: string
+) => {
+  const formattedLanguage = language.toLowerCase();
+  return fetcher({
+    url: `/user/knowledge_base/translate_text?text=${text}&lang=${formattedLanguage}`,
+    method: "POST",
+    body: {},
+    json: true,
+    token: token,
+  });
+};
+
+export const deleteText = async (token: string, id: number) => {
+  return fetcher({
+    url: `/user/knowledge_base/delete_text/${id}`,
+    method: "DELETE",
+    body: {},
+    json: true,
+    token: token,
   });
 };

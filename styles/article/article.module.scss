@@ -26,7 +26,13 @@
     }
 
     @include desktop {
-      width: 50%;
+      width: 800px;
+    }
+    @include between-desktop {
+      width: 900px;
+    }
+    @include desktop-xl {
+      width: 950px;
     }
 
     .paragraphWrapper {

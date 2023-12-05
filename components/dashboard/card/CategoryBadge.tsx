@@ -4,13 +4,19 @@ import { CategoryType } from "@/types/Article";
 import styles from "@styles/dashboard/article-card/category-badge.module.scss";
 import { useState } from "react";
 import { colors } from "@/lib/badge-colors";
+import Image from "next/image";
 
 type CategoryBadgePropsType = {
   name: string;
-  difficulty: number;
+  difficulty: number | null;
+  languageName?: string;
 };
 
-const CategoryBadge = ({ name, difficulty }: CategoryBadgePropsType) => {
+const CategoryBadge = ({
+  name,
+  difficulty,
+  languageName,
+}: CategoryBadgePropsType) => {
   const [category, _] = useState(() => {
     const category = colors.find((entry) => {
       if (entry.name === name) {
@@ -28,14 +34,17 @@ const CategoryBadge = ({ name, difficulty }: CategoryBadgePropsType) => {
     }
   });
 
-  const getBadgeColor = (level: number) => {
-    if (level >= 0.8) {
-      return "#EF1346";
-    } else if (level >= 0.4) {
-      return "#FF7C14";
-    } else {
+  const getBadgeColor = (level: number | null) => {
+    if (level) {
+      if (level >= 0.8) {
+        return "#EF1346";
+      }
+      if (level >= 0.4) {
+        return "#FF7C14";
+      }
       return "#10D132";
     }
+    return "#0359A4";
   };
   return (
     <div
@@ -43,13 +52,22 @@ const CategoryBadge = ({ name, difficulty }: CategoryBadgePropsType) => {
       style={{ backgroundColor: getBadgeColor(difficulty) }}
     >
       <span className={styles.iconWrapper}>
-        <CustomIcon
-          name={category.iconName}
-          alt={`category ${name} badge`}
-          weight="bold"
-          size={38}
-          color="white"
-        />
+        {!languageName ? (
+          <CustomIcon
+            name={category.iconName}
+            alt={`category ${name} badge`}
+            weight="bold"
+            size={38}
+            color="white"
+          />
+        ) : (
+          <Image
+            width={64}
+            height={32}
+            src={`/icons/flags/${languageName}.svg`}
+            alt={`flag of ${languageName}`}
+          />
+        )}
       </span>
     </div>
   );

@@ -10,17 +10,18 @@
     border-radius: 10px;
     transition: 0.2s;
     cursor: pointer;
+    width: 300px;
 
     &:hover {
       background-color: #cee6ff;
     }
 
     @include tablet {
-      max-width: 320px;
+      width: 320px;
     }
 
     @include desktop {
-      max-width: 400px;
+      width: 400px;
     }
 
     .imageWrapper {
@@ -46,6 +47,21 @@
     .contentWrapper {
       margin: 1em 0.6em;
       color: variables.$dark-text;
+      /* These are technically the same, but use both */
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+
+      -ms-word-break: break-all;
+      /* This is the dangerous one in WebKit, as it breaks things wherever */
+      word-break: break-all;
+      /* Instead use this non-standard one: */
+      word-break: break-word;
+
+      /* Adds a hyphen where the word breaks, if supported (No Blink) */
+      -ms-hyphens: auto;
+      -moz-hyphens: auto;
+      -webkit-hyphens: auto;
+      hyphens: auto;
 
       .title {
         text-transform: uppercase;

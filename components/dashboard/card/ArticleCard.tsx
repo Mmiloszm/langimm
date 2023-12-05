@@ -13,6 +13,7 @@ type ArticleCardPropsType = {
   thumbnail: string | null;
   category?: CategoryType;
   difficulty?: number;
+  languageName?: string;
 };
 
 const ArticleCard = ({
@@ -22,13 +23,14 @@ const ArticleCard = ({
   thumbnail,
   category,
   difficulty,
+  languageName,
 }: ArticleCardPropsType) => {
   const url = process.env.NEXT_PUBLIC_BACKEND_URL
     ? process.env.NEXT_PUBLIC_BACKEND_URL
     : "http://localhost:8000";
-  const truncateExcerpt = (toTruncate: string) => {
-    if (toTruncate.length > 192) {
-      const truncatedString = toTruncate.slice(0, 192).trim();
+  const truncatePhrase = (toTruncate: string, limit: number) => {
+    if (toTruncate.length > limit) {
+      const truncatedString = toTruncate.slice(0, limit).trim();
       const lastWordIndex = truncatedString.lastIndexOf(" ");
       const finalString = truncatedString.slice(0, lastWordIndex) + "...";
       return finalString;
@@ -53,8 +55,15 @@ const ArticleCard = ({
     <Link href={`/article/${id}`} passHref className={styles.link}>
       <div className={styles.cardWrapper}>
         <div className={styles.imageWrapper}>
-          {difficulty && category && (
+          {typeof difficulty !== "undefined" && category && (
             <CategoryBadge name={category.name} difficulty={difficulty} />
+          )}
+          {languageName && (
+            <CategoryBadge
+              name=""
+              difficulty={null}
+              languageName={languageName}
+            />
           )}
           {thumbnail ? (
             <Image
@@ -75,8 +84,8 @@ const ArticleCard = ({
           )}
         </div>
         <div className={styles.contentWrapper}>
-          <h3 className={styles.title}>{title}</h3>
-          <p className={styles.excerpt}>{truncateExcerpt(excerpt)}</p>
+          <h3 className={styles.title}>{truncatePhrase(title, 86)}</h3>
+          <p className={styles.excerpt}>{truncatePhrase(excerpt, 150)}</p>
         </div>
       </div>
     </Link>

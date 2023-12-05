@@ -2,13 +2,20 @@ import BasicLoader from "@/components/shared/loaders/BasicLoader";
 import PageNavigation from "@/components/shared/page-navigation/PageNavigation";
 import { getTextsFromKnowledgeBase } from "@/lib/api";
 import styles from "@/styles/knowledge-base/saved-words/saved-words.module.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import WordCard from "./WordCard";
 
 type savedWordsApiResponseType = {
   success: boolean;
-  texts: { text: string }[];
+  texts: textType[];
   total_texts: number;
+};
+
+type textType = {
+  id: number;
+  text: string;
+  translation: string;
+  language_id: number;
 };
 
 const SavedWords = () => {
@@ -16,8 +23,16 @@ const SavedWords = () => {
   const [offset, setOffset] = useState(12);
   const [isPossibleToFetchMore, setIsPossibleToFetchMore] = useState(true);
   const [page, setPage] = useState(1);
-  const [words, setWords] = useState<string[]>([]);
+  const [words, setWords] = useState<textType[]>([]);
   const [isEmpty, setIsEmpty] = useState(false);
+
+  const deleteTextFromCurrent = useCallback(
+    (id: number) => {
+      const newWords = words.filter((word) => word.id !== id);
+      setWords(newWords);
+    },
+    [words]
+  );
 
   useEffect(() => {
     const fetchWords = async () => {
@@ -27,8 +42,8 @@ const SavedWords = () => {
           await getTextsFromKnowledgeBase(token, 0, 12);
 
         if (initialWords.success === true) {
-          const tempWords: string[] = [];
-          initialWords.texts.forEach((item) => tempWords.push(item.text));
+          const tempWords: textType[] = [];
+          initialWords.texts.forEach((item) => tempWords.push(item));
           setWords(tempWords);
           setOffset(0);
           setAreWordsLoading(false);
@@ -59,8 +74,8 @@ const SavedWords = () => {
         setIsPossibleToFetchMore(false);
       }
       if (newWords.texts) {
-        const tempWords: string[] = [];
-        newWords.texts.forEach((item) => tempWords.push(item.text));
+        const tempWords: textType[] = [];
+        newWords.texts.forEach((item) => tempWords.push(item));
         setWords((words) => words.concat(tempWords));
         setAreWordsLoading(false);
       }
@@ -73,8 +88,15 @@ const SavedWords = () => {
         <>
           <div style={{ overflow: "hidden" }}>
             <section className={styles.wrapper}>
-              {words.slice((page - 1) * 12, page * 12).map((word, index) => (
-                <WordCard key={index} text={word} />
+              {words.slice((page - 1) * 12, page * 12).map((item) => (
+                <WordCard
+                  deleteWord={deleteTextFromCurrent}
+                  id={item.id}
+                  key={item.id}
+                  text={item.text}
+                  translation={item.translation}
+                  languageId={item.language_id}
+                />
               ))}{" "}
             </section>
           </div>

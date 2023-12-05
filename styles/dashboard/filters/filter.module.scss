@@ -123,6 +123,14 @@
               }
             }
           }
+          .addMore {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            background-color: transparent;
+            text-decoration: none !important;
+            border: 2px dotted variables.$elements-blue;
+          }
         }
       }
     }
