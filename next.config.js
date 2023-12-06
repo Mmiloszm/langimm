@@ -21,6 +21,12 @@ const nextConfig = {
         port: "8000",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "**.langimmersion.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };
