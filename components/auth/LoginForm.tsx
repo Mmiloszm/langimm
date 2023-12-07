@@ -11,6 +11,7 @@ import { LoadingButton } from "@mui/lab";
 import BasicLoader from "../shared/loaders/BasicLoader";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Swal from "sweetalert2";
 
 const loginContent = {
   url: "/signin",
@@ -39,10 +40,16 @@ const LoginForm = () => {
           password: formState.password,
         };
         const info = await signin(loginBody);
+
         if (info.refresh && info.access) {
           login({ refresh: info.refresh, access: info.access });
           router.replace("/dashboard");
-        } else {
+        }
+        if (!info.success) {
+          Swal.fire({
+            icon: "error",
+            title: "Nieprawidłowy login lub hasło",
+          });
           setError("Nie udało się poprawnie zalogować.");
         }
       } catch (e) {

@@ -36,11 +36,9 @@ const fetcher = async ({
   const res = await fetch(`${baseUrl}/${url}`, config);
 
   if (res.status === 401) {
-    Swal.fire({
-      icon: "error",
-      title: "Nieprawidłowy login lub hasło",
-    });
-    return;
+    return {
+      success: false,
+    };
   }
 
   if (res.status === 403) {
@@ -165,7 +163,7 @@ export const addArticleToKnowledgeBase = async (
   articleId: number
 ) => {
   return fetcher({
-    url: `/user/knowledge_base/article?article_id=${articleId}`,
+    url: `user/knowledge_base/article?article_id=${articleId}`,
     method: "POST",
     body: {},
     json: false,
@@ -179,7 +177,7 @@ export const addTextToKnowledgeBase = async (
   text: string
 ) => {
   return fetcher({
-    url: `/user/knowledge_base/text?article_id=${articleId}&text=${text}`,
+    url: `user/knowledge_base/text?article_id=${articleId}&text=${text}`,
     method: "POST",
     body: {},
     json: true,
@@ -193,7 +191,7 @@ export const getArticlesFromKnowledgeBase = async (
   limit: number
 ) => {
   return fetcher({
-    url: `/user/knowledge_base/article?limit=${limit}&offset=${offset}`,
+    url: `user/knowledge_base/article?limit=${limit}&offset=${offset}`,
     method: "GET",
     body: {},
     json: true,
@@ -207,7 +205,7 @@ export const getTextsFromKnowledgeBase = async (
   limit: number
 ) => {
   return fetcher({
-    url: `/user/knowledge_base/texts?limit=${limit}&offset=${offset}`,
+    url: `user/knowledge_base/texts?limit=${limit}&offset=${offset}`,
     method: "GET",
     body: {},
     json: true,
@@ -222,7 +220,7 @@ export const translateText = async (
 ) => {
   const formattedLanguage = language.toLowerCase();
   return fetcher({
-    url: `/user/knowledge_base/translate_text?text=${text}&lang=${formattedLanguage}`,
+    url: `user/knowledge_base/translate_text?text=${text}&lang=${formattedLanguage}`,
     method: "POST",
     body: {},
     json: true,
@@ -232,7 +230,7 @@ export const translateText = async (
 
 export const deleteText = async (token: string, id: number) => {
   return fetcher({
-    url: `/user/knowledge_base/delete_text/${id}`,
+    url: `user/knowledge_base/delete_text/${id}`,
     method: "DELETE",
     body: {},
     json: true,

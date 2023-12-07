@@ -35,7 +35,7 @@ const CategoryBadge = ({
   });
 
   const getBadgeColor = (level: number | null) => {
-    if (level) {
+    if (level !== null) {
       if (level >= 0.8) {
         return "#EF1346";
       }
