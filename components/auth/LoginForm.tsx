@@ -44,8 +44,7 @@ const LoginForm = () => {
         if (info.refresh && info.access) {
           login({ refresh: info.refresh, access: info.access });
           router.replace("/dashboard");
-        }
-        if (!info.success) {
+        } else if (!info.success) {
           Swal.fire({
             icon: "error",
             title: "Nieprawidłowy login lub hasło",
