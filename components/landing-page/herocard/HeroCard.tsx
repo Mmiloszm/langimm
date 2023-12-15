@@ -1,6 +1,7 @@
 import styles from "@styles/landing-page/hero/hero-card.module.scss";
 import PrimaryButton from "@/components/shared/buttons/PrimaryButton";
 import Image from "next/image";
+import Link from "next/link";
 
 const HeroCard = () => {
   return (
@@ -49,9 +50,11 @@ const HeroCard = () => {
           {/* <PrimaryButton variants={["transparent", "cardLoginButton"]}>
             Zaloguj się
           </PrimaryButton> */}
-          <PrimaryButton variants={["cardRegisterButton"]}>
-            Rozpocznij
-          </PrimaryButton>
+          <Link href="/signin">
+            <PrimaryButton variants={["cardRegisterButton"]}>
+              Rozpocznij
+            </PrimaryButton>
+          </Link>
         </div>
       </div>
     </div>

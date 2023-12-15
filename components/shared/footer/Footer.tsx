@@ -27,8 +27,11 @@ const Footer = () => {
             color="#00206a"
             weight="regular"
           ></CustomIcon>
-          <a href="mailto:jakismail@mail.com" className={styles.emailName}>
-            jakismail@mail.com
+          <a
+            href="mailto:contact@langimmersion.com"
+            className={styles.emailName}
+          >
+            contact@langimmersion.com
           </a>
         </div>
 

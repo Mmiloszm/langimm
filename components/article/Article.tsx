@@ -196,7 +196,7 @@ const Article = ({ articleId }: { articleId: number }) => {
   return (
     <div className={styles.contentWrapper}>
       {article ? (
-        <div className={styles.article}>
+        <article className={styles.article}>
           <div className={styles.tooltip}>
             {" "}
             <TutorialPopup />
@@ -294,7 +294,7 @@ const Article = ({ articleId }: { articleId: number }) => {
               </Link>
             </span>
           </div>
-        </div>
+        </article>
       ) : (
         <BasicLoader />
       )}

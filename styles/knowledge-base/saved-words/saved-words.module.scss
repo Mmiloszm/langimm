@@ -1,39 +1,53 @@
 @use "@/styles/mixins" as *;
-.wrapper {
-  padding: 2.5em 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  margin: 0 auto;
+
+.container {
   background: #f7f8fa;
-  width: 90%;
   border-radius: 8px;
-  gap: 25px;
 
-  @include desktop {
+  .exportWrapper {
     width: 100%;
-    padding: 2.5em;
-    display: grid;
-    grid-template-columns: repeat(3, 300px);
-    grid-template-rows: repeat(4, 1fr);
-    justify-items: center;
+    display: flex;
+    justify-content: flex-end;
+
+    .export {
+      margin: 2.5em 3em 0 0;
+    }
   }
 
-  @include desktop-xl {
-    width: 100%;
-    padding: 2.5em;
-    display: grid;
-    grid-template-columns: repeat(4, 300px);
-    grid-template-rows: repeat(3, 1fr);
-    justify-items: center;
-  }
-  @include between-desktop {
-    width: 100%;
-    padding: 2.5em;
-    display: grid;
-    grid-template-columns: repeat(3, 300px);
-    grid-template-rows: repeat(4, 1fr);
-    justify-items: center;
+  .wrapper {
+    padding: 2.5em 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    width: 90%;
+    gap: 25px;
+
+    @include desktop {
+      width: 100%;
+      padding: 2.5em;
+      display: grid;
+      grid-template-columns: repeat(3, 300px);
+      grid-template-rows: repeat(4, 1fr);
+      justify-items: center;
+    }
+
+    @include desktop-xl {
+      width: 100%;
+      padding: 2.5em;
+      display: grid;
+      grid-template-columns: repeat(4, 300px);
+      grid-template-rows: repeat(3, 1fr);
+      justify-items: center;
+    }
+    @include between-desktop {
+      width: 100%;
+      padding: 2.5em;
+      display: grid;
+      grid-template-columns: repeat(3, 300px);
+      grid-template-rows: repeat(4, 1fr);
+      justify-items: center;
+    }
   }
 }
 
