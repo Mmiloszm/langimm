@@ -13,7 +13,7 @@ export default async function RootLayout({
     <DashboardContextProvider>
       <UserContextProvider>
         <DefaultTheme>
-          <html lang="en" className={`${roboto.variable}`}>
+          <html lang="pl-PL" className={`${roboto.variable}`}>
             {/*
           <head /> will contain the components returned by the nearest parent
           head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
