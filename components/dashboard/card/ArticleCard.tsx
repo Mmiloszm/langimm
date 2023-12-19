@@ -67,7 +67,7 @@ const ArticleCard = ({
           )}
           {thumbnail ? (
             <Image
-              alt="article thumbnail"
+              alt="miniaturka artykułu"
               src={`${url}${thumbnail}`}
               fill={true}
             />
@@ -78,7 +78,7 @@ const ArticleCard = ({
                 size={220}
                 color="#194E7C"
                 weight="bold"
-                alt="default thumbnail"
+                alt=""
               />
             </div>
           )}

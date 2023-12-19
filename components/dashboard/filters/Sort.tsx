@@ -31,12 +31,11 @@ const Sort = ({
             "& .MuiSvgIcon-root": {
               color: "primary.dark",
             },
-            width: 130,
+            width: 140,
           }}
         >
+          <MenuItem value="nearest_difficulty">Dopasowane dla Ciebie</MenuItem>
           <MenuItem value="newest">Nowości</MenuItem>
-
-          <MenuItem value="nearest_difficulty">Polecane dla Ciebie</MenuItem>
         </Select>
       </FormControl>
     </div>

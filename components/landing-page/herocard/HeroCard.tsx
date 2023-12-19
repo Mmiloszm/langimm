@@ -10,7 +10,7 @@ const HeroCard = () => {
         height={580}
         width={480}
         src={"/ilustracje-03.png"}
-        alt="Girl sitting next to her laptop and learning"
+        alt="Dziewczyna siedząca obok laptopa i ucząca się."
         className={styles.heroImage}
       />
 

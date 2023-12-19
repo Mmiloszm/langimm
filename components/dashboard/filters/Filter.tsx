@@ -162,7 +162,7 @@ const Filter = ({
                       <span>Dodaj język</span>
                       <CustomIcon
                         name="add"
-                        alt="add icon"
+                        alt="ikona dodania"
                         size={20}
                         color="#0583f2"
                         weight="bold"

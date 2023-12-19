@@ -44,7 +44,7 @@ const SavedWords = () => {
         const initialWords: savedWordsApiResponseType =
           await getTextsFromKnowledgeBase(token, 0, 12);
 
-        if (initialWords.success === true) {
+        if (initialWords.success) {
           const tempWords: textType[] = [];
           initialWords.texts.forEach((item) => tempWords.push(item));
           setWords(tempWords);

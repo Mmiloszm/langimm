@@ -1,0 +1,32 @@
+@use "@/styles/mixins" as *;
+.contests {
+  color: black;
+  width: 100%;
+  @include tablet {
+    width: 550px;
+  }
+  @include desktop {
+    width: 800px;
+  }
+  ol {
+    counter-reset: item;
+  }
+  li {
+    display: block;
+  }
+  li:before {
+    content: counters(item, ".") ". ";
+    counter-increment: item;
+  }
+  .nested {
+    padding-left: 1em;
+  }
+  .item {
+    margin-top: 5px;
+  }
+
+  .link {
+    text-decoration: none !important;
+    color: black;
+  }
+}
