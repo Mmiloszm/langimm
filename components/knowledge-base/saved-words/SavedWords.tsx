@@ -4,6 +4,8 @@ import { getTextsFromKnowledgeBase } from "@/lib/api";
 import styles from "@/styles/knowledge-base/saved-words/saved-words.module.scss";
 import { useState, useEffect, useCallback } from "react";
 import WordCard from "./WordCard";
+import { Button } from "@mui/material";
+import DownloadDialog from "./DownloadDialog";
 
 type savedWordsApiResponseType = {
   success: boolean;
@@ -25,6 +27,7 @@ const SavedWords = () => {
   const [page, setPage] = useState(1);
   const [words, setWords] = useState<textType[]>([]);
   const [isEmpty, setIsEmpty] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const deleteTextFromCurrent = useCallback(
     (id: number) => {
@@ -41,7 +44,7 @@ const SavedWords = () => {
         const initialWords: savedWordsApiResponseType =
           await getTextsFromKnowledgeBase(token, 0, 12);
 
-        if (initialWords.success === true) {
+        if (initialWords.success) {
           const tempWords: textType[] = [];
           initialWords.texts.forEach((item) => tempWords.push(item));
           setWords(tempWords);
@@ -81,12 +84,31 @@ const SavedWords = () => {
       }
     }
   };
+
+  const handleClickOpen = () => {
+    setDialogOpen(true);
+  };
+
+  const handleClose = () => {
+    setDialogOpen(false);
+  };
   return (
     <section>
       {" "}
       {!isEmpty && !areWordsLoading ? (
         <>
-          <div style={{ overflow: "hidden" }}>
+          <div className={styles.container}>
+            <DownloadDialog open={dialogOpen} handleClose={handleClose} />
+            <div className={styles.exportWrapper}>
+              <Button
+                variant="contained"
+                sx={{ backgroundColor: "#0583f2" }}
+                className={styles.export}
+                onClick={() => handleClickOpen()}
+              >
+                Eksport
+              </Button>
+            </div>
             <section className={styles.wrapper}>
               {words.slice((page - 1) * 12, page * 12).map((item) => (
                 <WordCard

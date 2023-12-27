@@ -65,7 +65,7 @@ const TopicsForm = ({
                   color="#00206a"
                   size={matches ? 128 : 32}
                   weight="bold"
-                  alt={`category ${category.name}`}
+                  alt={`kategoria ${category.name}`}
                 />
                 <span className={styles.itemName}>
                   {categoryTranslations[category.id]

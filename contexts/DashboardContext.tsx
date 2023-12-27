@@ -23,7 +23,7 @@ export const DashboardContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [activeSort, setActiveSort] = useState<"nearest_difficulty" | "newest">(
-    "newest"
+    "nearest_difficulty"
   );
   const [activeLanguage, setActiveLanguage] = useState<number>(0);
   return (

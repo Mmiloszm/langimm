@@ -55,7 +55,7 @@ const CategoryBadge = ({
         {!languageName ? (
           <CustomIcon
             name={category.iconName}
-            alt={`category ${name} badge`}
+            alt={`odznaka kategorii ${name} `}
             weight="bold"
             size={38}
             color="white"
@@ -65,7 +65,7 @@ const CategoryBadge = ({
             width={64}
             height={32}
             src={`/icons/flags/${languageName}.svg`}
-            alt={`flag of ${languageName}`}
+            alt={`flaga ${languageName}`}
           />
         )}
       </span>

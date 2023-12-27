@@ -196,7 +196,7 @@ const Article = ({ articleId }: { articleId: number }) => {
   return (
     <div className={styles.contentWrapper}>
       {article ? (
-        <div className={styles.article}>
+        <article className={styles.article}>
           <div className={styles.tooltip}>
             {" "}
             <TutorialPopup />
@@ -213,7 +213,7 @@ const Article = ({ articleId }: { articleId: number }) => {
                     </p>
                     <div className={styles.thumbnail}>
                       <Image
-                        alt="article thumbnail"
+                        alt="miniaturka artykułu"
                         src={`${url}${article.thumbnail}`}
                         fill={true}
                       />
@@ -232,7 +232,7 @@ const Article = ({ articleId }: { articleId: number }) => {
                   <div className={styles.imageWrapper}>
                     <div className={styles.thumbnailWrapper}>
                       <Image
-                        alt="article thumbnail"
+                        alt="miniaturka artykułu"
                         src={`${url}${paragraphImage.image}`}
                         fill={true}
                       />
@@ -271,7 +271,7 @@ const Article = ({ articleId }: { articleId: number }) => {
                         key={image.paragraph_id}
                       >
                         <Image
-                          alt="article thumbnail"
+                          alt="miniaturka artykułu"
                           src={`${url}${article.thumbnail}`}
                           fill={true}
                         />
@@ -294,7 +294,7 @@ const Article = ({ articleId }: { articleId: number }) => {
               </Link>
             </span>
           </div>
-        </div>
+        </article>
       ) : (
         <BasicLoader />
       )}

@@ -78,7 +78,7 @@ const WordCard = ({
           width={64}
           height={32}
           src={`/icons/flags/${flag}.svg`}
-          alt={`flag of ${flag}`}
+          alt={`flaga ${flag}`}
         />
         <IconButton onClick={() => handleDelete()}>
           {isLoading ? (
