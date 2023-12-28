@@ -52,7 +52,7 @@ const LanguagesForm = ({
                   <Image
                     src={`/icons/flags/${language.name}.svg`}
                     fill={true}
-                    alt={`flag of ${language.name}`}
+                    alt={`flaga ${language.name}`}
                   />
                 </div>
 

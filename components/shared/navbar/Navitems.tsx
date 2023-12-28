@@ -152,7 +152,7 @@ const Navitems = ({ version }: NavitemsType) => {
                           weight="regular"
                           color="white"
                           size={32}
-                          alt="change topics"
+                          alt="zmiana tematów"
                         />
                       }
                     >
@@ -176,7 +176,7 @@ const Navitems = ({ version }: NavitemsType) => {
                         weight="regular"
                         color="white"
                         size={32}
-                        alt="sign out"
+                        alt="wyloguj się"
                       />
                     }
                   >
@@ -222,7 +222,7 @@ const Navitems = ({ version }: NavitemsType) => {
                             weight="regular"
                             color="#0359a4"
                             size={32}
-                            alt="sign out"
+                            alt="wyloguj się"
                           />
                         </ListItemIcon>
                         Wyloguj się

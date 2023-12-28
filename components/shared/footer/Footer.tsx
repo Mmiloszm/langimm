@@ -27,20 +27,20 @@ const Footer = () => {
             color="#00206a"
             weight="regular"
           ></CustomIcon>
-          <a href="mailto:jakismail@mail.com" className={styles.emailName}>
-            jakismail@mail.com
+          <a
+            href="mailto:contact@langimmersion.com"
+            className={styles.emailName}
+          >
+            contact@langimmersion.com
           </a>
         </div>
 
         <div className={styles.menu}>
-          <Link href={"/"} className={styles.menuItem}>
-            Skąd czerpiemy artykuły
+          <Link href={"/terms-of-service"} className={styles.menuItem}>
+            Warunki korzystania
           </Link>
-          <Link href={"/"} className={styles.menuItem}>
-            Dostępne języki
-          </Link>
-          <Link href={"/"} className={styles.menuItem}>
-            Polityka prywatności
+          <Link href={"/instruction"} className={styles.menuItem}>
+            Instrukcja użytkownika
           </Link>
         </div>
       </div>

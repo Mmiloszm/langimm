@@ -55,7 +55,7 @@ const TranslatedText = ({
                     width={64}
                     height={32}
                     src={`/icons/translators/deepl.svg`}
-                    alt={`logo of deepl`}
+                    alt={`logo deepl`}
                   />
                 </Link>
               ) : (
@@ -64,7 +64,7 @@ const TranslatedText = ({
                     width={64}
                     height={32}
                     src={`/icons/translators/google.svg`}
-                    alt={`logo of Google Translate`}
+                    alt={`logo Google Translate`}
                   />
                 </Link>
               )}

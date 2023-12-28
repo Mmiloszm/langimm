@@ -56,7 +56,7 @@ const PageNavigation = ({
             size={16}
             weight="bold"
             color="white"
-            alt="last page"
+            alt="ostatnia stroona"
           />
         }
       >
@@ -74,7 +74,7 @@ const PageNavigation = ({
             size={16}
             weight="bold"
             color="white"
-            alt="next page"
+            alt="następna strona"
           />
         }
       >

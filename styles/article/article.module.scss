@@ -1,11 +1,12 @@
-@use "@/styles/variables";
 @use "@/styles/mixins" as *;
+@import "../variables";
 
 .contentWrapper {
   padding-top: 8em;
   display: flex;
   justify-content: center;
   width: 100%;
+  color: $primary-text;
 
   @include desktop {
     padding-top: 10em;
@@ -13,6 +14,7 @@
 
   .article {
     width: 90%;
+    margin-bottom: 5em;
 
     .header {
       @include desktop {
@@ -29,10 +31,10 @@
       width: 800px;
     }
     @include between-desktop {
-      width: 900px;
+      width: 800px;
     }
     @include desktop-xl {
-      width: 950px;
+      width: 800px;
     }
 
     .paragraphWrapper {

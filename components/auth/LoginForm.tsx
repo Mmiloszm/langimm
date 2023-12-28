@@ -18,7 +18,6 @@ const loginContent = {
   header: "Witaj z powrotem",
   secondaryButton: "Utwórz konto",
   primaryButton: "Zaloguj się",
-  hint: "Nie pamiętasz hasła?",
 };
 
 const initial = { username: "", password: "" };
@@ -80,7 +79,7 @@ const LoginForm = () => {
                   src="/logo-dark.svg"
                   height={100}
                   width={128}
-                  alt="Logo"
+                  alt="typograficzne logo Langimmersion"
                 />
                 <h2 className={styles.greeter}>{content.header}</h2>
               </header>
@@ -113,9 +112,6 @@ const LoginForm = () => {
                       type="password"
                       autoComplete="current-password"
                     />
-                    {content.hint && (
-                      <span className={styles.hint}>{content.hint}</span>
-                    )}
                   </div>
                 </div>
 
@@ -123,7 +119,7 @@ const LoginForm = () => {
                   <div className={styles.errorInfo}>
                     <CustomIcon
                       name="warning"
-                      alt="warning icon"
+                      alt="ikona ostrzegawcza"
                       color="red"
                       size={32}
                       weight="bold"

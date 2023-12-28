@@ -105,7 +105,7 @@ const RegistrationForm = () => {
                   src="/logo-dark.svg"
                   height={100}
                   width={128}
-                  alt="Logo"
+                  alt="Typograficzne logo Langimmersion"
                 />
                 <h2 className={styles.greeter}>Stwórz konto</h2>
               </header>
@@ -182,7 +182,7 @@ const RegistrationForm = () => {
                   <div className={styles.errorInfo}>
                     <CustomIcon
                       name="warning"
-                      alt="warning icon"
+                      alt="Ikona ostrzegawcza"
                       color="red"
                       size={32}
                       weight="bold"
