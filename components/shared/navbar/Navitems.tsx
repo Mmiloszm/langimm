@@ -12,6 +12,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 type NavitemsType = {
   version?: "default" | "dashboard";
@@ -19,6 +20,7 @@ type NavitemsType = {
 
 const Navitems = ({ version }: NavitemsType) => {
   const { logout } = useContext(UserContext);
+  const router = useRouter();
   const [display, setDisplay] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -168,6 +170,7 @@ const Navitems = ({ version }: NavitemsType) => {
                     variant="text"
                     onClick={() => {
                       logout();
+                      router.push("/");
                       resetDisplay();
                     }}
                     startIcon={
@@ -213,6 +216,7 @@ const Navitems = ({ version }: NavitemsType) => {
                         onClick={() => {
                           handleMenuClose();
                           logout();
+                          router.push("/");
                         }}
                       >
                         <ListItemIcon>
