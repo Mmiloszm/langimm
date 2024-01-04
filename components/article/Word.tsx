@@ -75,6 +75,7 @@ const Word = ({
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLSpanElement>) => {
     if (event.key === "Enter") {
+      event.preventDefault();
       selectIfPossible();
     }
   };
