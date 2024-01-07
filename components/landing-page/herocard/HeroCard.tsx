@@ -41,7 +41,7 @@ const HeroCard = () => {
             <span className={`${styles.square} ${styles.dark}`}> </span>
             <span className={styles.paragraphWrapper}>
               <p className={styles.cardParagraph}>
-                Rozwiązuj fiszki i ucz się nieznanych słow!
+                Utrwalaj zapisane słowa i ucz się nowych!
               </p>
             </span>
           </div>
