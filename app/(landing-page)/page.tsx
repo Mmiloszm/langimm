@@ -28,7 +28,7 @@ export default function Home() {
       <section className={`${styles.container} ${styles.blue}`}>
         <ContentPreview
           title="Ucz się i zapamiętuj."
-          subtitle="Rozwiązuj fiszki zawierające dodane wcześniej przez Ciebie słowa."
+          subtitle="Utrwalaj wcześniej dodane słowa i zapisuj je na swoim urządzeniu."
           image={{
             url: "/ilustracje-02.png",
             alt: "Zdjęcia procesu nauki",
